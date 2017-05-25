@@ -1,0 +1,89 @@
+{
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"*"
+			],
+			"name": "--------Settings--------",
+			"path": "."
+		},
+		{
+			"name": "--------Tools--------",
+			"path": "tools"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-project",
+				".gitignore",
+				".jscsrc",
+				".sublime-gulp.cache",
+				"gulpfile.js",
+				"package.json",
+				"todo",
+				"*.zip",
+				"*.psd",
+				"*.pdf"
+			],
+			"folder_exclude_patterns":
+			[
+				"node_modules",
+				".sass-cache",
+				"_doc"
+			],
+			"name": "----Node Modules-----",
+			"path": "node_modules"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-project",
+				".gitignore",
+				".jscsrc",
+				".sublime-gulp.cache",
+				"gulpfile.js",
+				"todo",
+				"*.zip",
+				"*.psd",
+				"*.pdf"
+			],
+			"folder_exclude_patterns":
+			[
+				"node_modules",
+				".sass-cache",
+				"_doc"
+			],
+			"name": "----Development-----",
+			"path": "src"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"package.json",
+				"*.sublime-project",
+				".gitignore",
+				".jscsrc",
+				".sublime-gulp.cache",
+				"gulpfile.js",
+				"todo",
+				"*.zip",
+				"*.psd",
+				"*.pdf"
+			],
+			"folder_exclude_patterns":
+			[
+				"node_modules",
+				".sass-cache",
+				"_doc",
+				"admin"
+			],
+			"name": "------Production------",
+			"path": "dist"
+		},
+		{
+			"path": "C:\\xampp\\htdocs\\devkit\\CF-react-universal-boilerplate"
+		}
+	]
+}

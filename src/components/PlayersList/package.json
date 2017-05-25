@@ -1,0 +1,6 @@
+{
+  "name": "PlayersList",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PlayersList.js"
+}
