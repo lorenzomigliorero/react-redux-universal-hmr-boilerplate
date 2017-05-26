@@ -3,6 +3,7 @@ import commonConfig from './webpack.config.common.babel';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import jsonImporter from 'node-sass-json-importer';
 
 let config = Object.assign(commonConfig, {
 	
@@ -51,13 +52,19 @@ if (process.env.NODE_ENV === 'development') {
 				'style-loader',
 				{
 					loader: 'css-loader',
-					query: {
+					options: {
 						modules: true,
 						importLoaders: 1,
 						localIdentName: '[name]__[local]__[hash:base64:5]'
 					}
 				},
-				'sass-loader'
+				{
+					loader: 'sass-loader',
+					options: {
+						data: '@import \'../../constant/index.json\';',
+						importer: jsonImporter
+					}
+				}
 			]
 		}
 
@@ -90,7 +97,13 @@ if (
 							localIdentName: '[name]__[local]__[hash:base64:5]'
 						}
 					},
-					'sass-loader'
+					{
+						loader: 'sass-loader',
+						options: {
+							data: '@import \'../../constant/index.json\';',
+							importer: jsonImporter
+						}
+					}
 				]
 			})
 		}

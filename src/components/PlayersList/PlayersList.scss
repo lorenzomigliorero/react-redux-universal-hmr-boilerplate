@@ -1,6 +1,6 @@
 .test {
-	
-	color: green;
+
+	color: map-get($colors, "primary");
 
 }
 

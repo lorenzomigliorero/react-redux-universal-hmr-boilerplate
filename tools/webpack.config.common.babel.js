@@ -30,6 +30,7 @@ let config = {
 		extensions: [
 			'.js',
 			'.jsx',
+			'.json',
 			'.scss'
 		]
 

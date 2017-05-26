@@ -96,6 +96,7 @@
     "html-webpack-plugin": "2.28.0",
     "isomorphic-style-loader": "2.0.0",
     "node-sass": "4.5.3",
+    "node-sass-json-importer": "3.0.2",
     "react-transform-hmr": "1.0.4",
     "rimraf": "2.6.1",
     "sass-loader": "6.0.5",
