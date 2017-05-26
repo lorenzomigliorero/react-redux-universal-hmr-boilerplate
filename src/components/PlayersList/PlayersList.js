@@ -16,7 +16,7 @@ export default class PlayerList extends Component {
 				{
 					this.props.players.map((i, index) => (
 
-						<li key={index}>
+						<li key={index} className={index % 2 === 0 ? styles.odd : ''}>
 							{i.name}
 							<button onClick={() => this.props.removePlayer(i)}>Remove player {i.name}</button>
 						</li>

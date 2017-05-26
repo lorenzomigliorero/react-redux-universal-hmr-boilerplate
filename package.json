@@ -6,7 +6,6 @@
   "scripts": {
     "clean": "rimraf dist",
     "dev": "better-npm-run dev",
-    "dev:universal": "better-npm-run dev:universal",
     "build:client": "better-npm-run build:client",
     "build:static": "better-npm-run build:static",
     "build:server": "better-npm-run build:server",
@@ -29,14 +28,6 @@
       "env": {
         "NODE_ENV": "development",
         "PORT": 3001
-      }
-    },
-    "dev:universal": {
-      "command": "nodemon --exec babel-node src/server",
-      "env": {
-        "NODE_ENV": "development",
-        "PORT": 3001,
-        "UNIVERSAL": true
       }
     },
     "build:client": {

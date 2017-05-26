@@ -24,7 +24,15 @@ let config = Object.assign(commonConfig, {
 	
 	},
 
-	plugins: []
+	plugins: [
+
+		new webpack.DefinePlugin({
+			
+			'process.env.STATIC': JSON.stringify(process.env.STATIC)
+
+		})
+
+	]
 
 });
 
