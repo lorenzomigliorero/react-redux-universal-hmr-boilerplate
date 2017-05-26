@@ -7,6 +7,22 @@ import reducer from './reducers';
 const Router = require('react-router-dom')[process.env.STATIC ? 'HashRouter' : 'BrowserRouter'];
 const store = createStore(reducer);
 
+/**
+ * Import styles
+ */
+
+require('./styles');
+
+/**
+ * Import constant
+ */
+
+require('./constant');
+
+/**
+ * Render App component
+ */
+
 const renderComponent = () => {
 
 	const App = require('./components/App').default;

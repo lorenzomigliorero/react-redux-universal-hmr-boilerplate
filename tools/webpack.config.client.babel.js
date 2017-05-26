@@ -61,8 +61,11 @@ if (process.env.NODE_ENV === 'development') {
 				{
 					loader: 'sass-loader',
 					options: {
-						data: '@import \'../../constant/index.json\';',
-						importer: jsonImporter
+						data: '@import \'base.scss\';',
+						importer: jsonImporter,
+						includePaths: [
+							path.resolve(__dirname, '..', 'src', 'styles')
+						]
 					}
 				}
 			]
@@ -100,8 +103,11 @@ if (
 					{
 						loader: 'sass-loader',
 						options: {
-							data: '@import \'../../constant/index.json\';',
-							importer: jsonImporter
+							data: '@import \'base.scss\';',
+							importer: jsonImporter,
+							includePaths: [
+								path.resolve(__dirname, '..', 'src', 'styles')
+							]
 						}
 					}
 				]

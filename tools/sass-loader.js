@@ -1,4 +1,5 @@
 import sass from 'node-sass';
+import path from 'path';
 import jsonImporter from 'node-sass-json-importer';
 
 module.exports = (data, file) => {
@@ -6,10 +7,13 @@ module.exports = (data, file) => {
 	try {
 		
 		return sass.renderSync({
-			data: `@import \'../../constant/index.json\';${data}`,
+			data: `@import \'base.scss\'; ${data}`,
 			file,
 			importer: [
 				jsonImporter
+			],
+			includePaths: [
+				path.resolve(__dirname, '..', 'src', 'styles')
 			]
 		}).css.toString('utf8');
 	
