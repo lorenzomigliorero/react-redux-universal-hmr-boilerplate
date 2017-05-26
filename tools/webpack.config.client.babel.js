@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import jsonImporter from 'node-sass-json-importer';
+import autoprefixer from 'autoprefixer';
 
 let config = Object.assign(commonConfig, {
 	
@@ -65,6 +66,14 @@ if (process.env.NODE_ENV === 'development') {
 						importer: jsonImporter,
 						includePaths: [
 							path.resolve(__dirname, '..', 'src', 'styles')
+						]
+					}
+				},
+				{
+					loader: 'postcss-loader',
+					options: {
+						plugins: [
+							autoprefixer('last 2 versions', 'ie 10')
 						]
 					}
 				}

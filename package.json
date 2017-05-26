@@ -76,6 +76,7 @@
     "redux-thunk": "2.2.0"
   },
   "devDependencies": {
+    "autoprefixer": "7.1.1",
     "babel-cli": "6.24.1",
     "babel-core": "6.24.1",
     "babel-loader": "7.0.0",
@@ -97,6 +98,7 @@
     "isomorphic-style-loader": "2.0.0",
     "node-sass": "4.5.3",
     "node-sass-json-importer": "3.0.2",
+    "postcss-loader": "2.0.5",
     "react-transform-hmr": "1.0.4",
     "rimraf": "2.6.1",
     "sass-loader": "6.0.5",
