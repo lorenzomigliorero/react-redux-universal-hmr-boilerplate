@@ -4,29 +4,12 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { renderToString } from 'react-dom/server';
 import { matchPath, StaticRouter as Router } from 'react-router-dom';
-import ejs from 'ejs';
 import routes from './views/routes';
 import path from 'path';
 
-var app;
 const PORT = process.env.PORT;
 
-/**
- * If NODE_ENV is on development, launch dev server with HMR,
- * else create a new Express instance
- */
-
-if (process.env.NODE_ENV === 'development') {
-
-	app = require('../tools/webpack-dev-server').default;
-
-} else {
-
-	app = new Express();
-
-};
-
-app
+new Express()
 	
 	.use(Express.static(path.resolve(__dirname, 'public')))
 	
@@ -52,7 +35,7 @@ app
 		
 		if (process.env.UNIVERSAL) {
 
-			const App = require('./views/App').default;
+			const App = require('./components/App').default;
 			const reducers = require('./reducers/').default;
 			const store = createStore(reducers);
 
@@ -82,11 +65,13 @@ app
 			status = 404;
 		}
 
-		var template = ejs.compile(require('./views/index').default);
+		var template = require('./views/index.ejs');
 
 		return res.status(status).send(template({
+			
 			title: 'My first React App',
 			markup
+		
 		}));
 
 	})

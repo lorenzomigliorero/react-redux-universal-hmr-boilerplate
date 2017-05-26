@@ -50,7 +50,7 @@ export default app
 			return next();
 		}
 		return false;
-	});
+	})
 
 	/**
 	 * To make history working:
@@ -73,9 +73,9 @@ export default app
 
 	// });
 
-	// .listen(3000, (err) => {
-	// 	if (err) {
-	// 		throw err;
-	// 	}
-	// 	console.info(`==> 🚧  Webpack development server listening on port ${PORT}`);
-	// });
+	.listen(PORT, (err) => {
+		if (err) {
+			throw err;
+		}
+		console.info(`==> 🚧  Webpack development server listening on port ${PORT}`);
+	});

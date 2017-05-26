@@ -8,6 +8,7 @@
     "dev": "better-npm-run dev",
     "dev:universal": "better-npm-run dev:universal",
     "build:client": "better-npm-run build:client",
+    "build:static": "better-npm-run build:static",
     "build:server": "better-npm-run build:server",
     "build": "better-npm-run build",
     "start": "better-npm-run start"
@@ -24,7 +25,7 @@
   "homepage": "https://github.com/lorenzomigliorero/react-redux-universal-hmr-boilerplate#readme",
   "betterScripts": {
     "dev": {
-      "command": "nodemon --exec babel-node src/server --watch src/server.js",
+      "command": "babel-node tools/webpack-dev-server.js",
       "env": {
         "NODE_ENV": "development",
         "PORT": 3001
@@ -44,10 +45,18 @@
         "NODE_ENV": "production"
       }
     },
+    "build:static": {
+      "command": "npm run clean && webpack -p --progress --hide-modules --config tools/webpack.config.client.babel.js",
+      "env": {
+        "NODE_ENV": "production",
+        "STATIC": true
+      }
+    },
     "build:server": {
       "command": "webpack -p --progress --hide-modules --config tools/webpack.config.server.babel.js",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "BABEL_ENV": "node"
       }
     },
     "build": {
@@ -78,21 +87,30 @@
     "babel-cli": "6.24.1",
     "babel-core": "6.24.1",
     "babel-loader": "7.0.0",
+    "babel-plugin-css-modules-transform": "1.2.7",
     "babel-plugin-react-transform": "2.0.2",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
     "babel-register": "6.24.1",
     "better-npm-run": "0.0.15",
+    "css-loader": "0.28.2",
     "ejs": "2.5.6",
+    "ejs-loader": "0.3.0",
     "eslint": "3.19.0",
     "eslint-loader": "1.7.1",
     "eslint-plugin-react": "7.0.1",
+    "extract-text-webpack-plugin": "2.1.0",
     "file-loader": "0.11.1",
     "html-webpack-plugin": "2.28.0",
+    "isomorphic-style-loader": "2.0.0",
+    "node-sass": "4.5.3",
     "react-transform-hmr": "1.0.4",
     "rimraf": "2.6.1",
+    "sass-loader": "6.0.5",
+    "style-loader": "0.18.1",
     "webpack": "2.6.0",
     "webpack-dev-middleware": "1.10.2",
-    "webpack-hot-middleware": "2.18.0"
+    "webpack-hot-middleware": "2.18.0",
+    "webpack-node-externals": "1.6.0"
   }
 }

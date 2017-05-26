@@ -5,10 +5,10 @@ export default Object.assign(clientConfig, {
 
 	entry: {
 		
-		bundle: [
+		main: [
 			'webpack/hot/only-dev-server',
 			'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-			...clientConfig.entry.bundle
+			...clientConfig.entry.main
 		]
 	
 	},

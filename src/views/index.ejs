@@ -1,0 +1,48 @@
+<%
+
+	var params = typeof(locals) !== 'undefined' ? locals : {};
+
+	params = Object.assign({
+
+		title 			: 'Application title',
+		description 	: 'Application description',
+		markup 			: 'Application markup',
+		entry			: process.env.BABEL_ENV === 'node'
+
+	}, params);
+
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title><%= params.title %></title>
+		
+		<meta name="description" content="<%= params.description %>" />
+		
+		<% if (params.entry) { %>
+		
+			<link rel="stylesheet" href="main.css" />
+		
+		<% } %>
+	
+	</head>
+	
+	<body>
+		
+		<div id="root"><%= params.markup %></div>
+
+		<% if (params.entry) { %>
+		
+			<script src="main.js"></script>
+		
+		<% } %>
+	
+	</body>
+
+</html>

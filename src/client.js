@@ -9,7 +9,7 @@ let store = createStore(reducer);
 
 const renderComponent = () => {
 
-	const App = require('./views/App').default;
+	const App = require('./components/App').default;
 
 	return (
 
@@ -35,7 +35,7 @@ render(renderComponent(), document.getElementById('root'));
 
 if (module.hot) {
 	
-	module.hot.accept('./views/App', () => render(renderComponent(), document.getElementById('root')));
+	module.hot.accept('./components/App', () => render(renderComponent(), document.getElementById('root')));
 	module.hot.accept('./reducers', () => store.replaceReducer(require('./reducers').default));
 
 };

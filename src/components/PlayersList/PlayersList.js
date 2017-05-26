@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './PlayersList.scss';
 
 export default class PlayerList extends Component {
 	
@@ -10,7 +11,7 @@ export default class PlayerList extends Component {
 
 	render() {
 		return (
-			<ul>
+			<ul className={styles.test}>
 
 				{
 					this.props.players.map((i, index) => (
@@ -28,4 +29,4 @@ export default class PlayerList extends Component {
 			</ul>
 		);
 	}
-}
+};

@@ -1,6 +1,7 @@
-import fs from 'fs';
 import path from 'path';
 import commonConfig from './webpack.config.common.babel';
+import externals from 'webpack-node-externals';
+import webpack from 'webpack';
 
 export default Object.assign(commonConfig, {
 	
@@ -26,10 +27,34 @@ export default Object.assign(commonConfig, {
 	
 	},
 
-	// SEE: http://jlongster.com/Backend-Apps-with-Webpack--Part-I
-	externals: fs.readdirSync('node_modules').reduce((accumulator, module) => {
-		accumulator[module] = 'commonjs ' + module;
-		return accumulator;
-	}, {})
+	module: {
+		
+		rules: commonConfig.module.rules.concat([
+		
+			{
+				test: /\.ejs$/,
+				exclude: /node_modules/,
+				loader: 'ejs-loader?variable=locals'
+			}
+		
+		])
+	
+	},
+
+	plugins: commonConfig.plugins.concat([
+
+		new webpack.DefinePlugin({
+			
+			'process.env.BABEL_ENV': JSON.stringify(process.env.BABEL_ENV)
+
+		})
+
+	]),
+
+	externals: [
+
+		externals()
+
+	]
 
 });

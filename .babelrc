@@ -3,6 +3,24 @@
 	presets: [
 		'es2015',
 		'react'
-	]
+	],
+
+	env: {
+
+		"node": {
+
+			plugins: [
+		        [
+		            "css-modules-transform", {
+		                "preprocessCss": "./tools/sass-loader.js",
+		                "extensions": [".scss"],
+		                "generateScopedName": '[name]__[local]__[hash:base64:5]'
+		            }
+		        ]
+		    ]
+		
+		}
+
+	}
 
 }

@@ -13,18 +13,13 @@ let config = {
 				test:    /\.jsx?$/
 			},
 			{
-			// NOTE: https://github.com/webpack/file-loader
-				exclude: /node_modules/,
-				loader:  'file-loader?name=[name].[ext]',
-				test:    /\.html$/
-			},
-			{
 				// NOTE: https://github.com/babel/babel-loader
 				enforce: 'post',
 				exclude: /node_modules/,
 				loader:  'babel-loader',
 				test:    /\.jsx?$/
 			}
+		
 		]
 	
 	},
@@ -34,21 +29,41 @@ let config = {
 		// NOTE: https://webpack.github.io/docs/configuration.html#resolve-extensions
 		extensions: [
 			'.js',
-			'.jsx'
+			'.jsx',
+			'.scss'
 		]
 
 	},
 
-	plugins: []
+	plugins: [
+
+	]
 
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (
+	process.env.NODE_ENV === 'production'
+	|| process.env.STATIC
+) {
 
 	config.plugins.push(
 	
 		new webpack.optimize.UglifyJsPlugin({
-			minimize: true
+			compress: {
+				warnings: false,
+				screw_ie8: true,
+				conditionals: true,
+				unused: true,
+				comparisons: true,
+				sequences: true,
+				dead_code: true,
+				evaluate: true,
+				join_vars: true,
+				if_return: true
+			},
+			output: {
+				comments: false
+			}
 		})
 
 	);
