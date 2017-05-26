@@ -1,5 +1,6 @@
 import Express from 'express';
 import webpack from 'webpack';
+import path from 'path';
 import devConfig from './webpack.config.dev.babel';
 
 const PORT = process.env.PORT;
@@ -57,21 +58,21 @@ export default app
 	 * https://github.com/ampedandwired/html-webpack-plugin/issues/145#issuecomment-170554832
 	 */
 
-	// .use('*', (req, res, next) => {
+	.use('*', (req, res, next) => {
 
-	// 	const filename = path.join(compiler.outputPath, 'index.html');
+		const filename = path.join(compiler.outputPath, 'index.html');
 
-	// 	compiler.outputFileSystem.readFile(filename, (err, result) => {
-	// 		if (err) {
-	// 			return next(err);
-	// 		}
-	// 		res.set('content-type', 'text/html');
-	// 		res.send(result);
-	// 		res.end();
-	// 		return false;
-	// 	});
+		compiler.outputFileSystem.readFile(filename, (err, result) => {
+			if (err) {
+				return next(err);
+			}
+			res.set('content-type', 'text/html');
+			res.send(result);
+			res.end();
+			return false;
+		});
 
-	// });
+	})
 
 	.listen(PORT, (err) => {
 		if (err) {
