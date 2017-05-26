@@ -1,10 +1,9 @@
-import path from  'path';
 import commonConfig from './webpack.config.common.babel';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import jsonImporter from 'node-sass-json-importer';
-import autoprefixer from 'autoprefixer';
+import path from 'path';
+import { scss, css, postcss } from './webpack-styles-loaders';
 
 let config = Object.assign(commonConfig, {
 	
@@ -34,58 +33,44 @@ let config = Object.assign(commonConfig, {
 
 		})
 
-	]
+	],
+
+	module: {
+		
+		rules: commonConfig.module.rules.concat([
+
+		])
+	
+	}
 
 });
 
 /**
- * Use style loader in development environment
+ * Use style loader in development environment for performance reasons
  */
 
 if (process.env.NODE_ENV === 'development') {
-
-	config.module.rules = commonConfig.module.rules.concat([
+	
+	config.module.rules = config.module.rules.concat([
 
 		{
-			test: /\.scss?$/,
+
+			test: /\.scss$/,
 			exclude: /node_modules/,
 			use: [
 				'style-loader',
-				{
-					loader: 'css-loader',
-					options: {
-						modules: true,
-						importLoaders: 1,
-						localIdentName: '[name]__[local]__[hash:base64:5]'
-					}
-				},
-				{
-					loader: 'sass-loader',
-					options: {
-						data: '@import \'base.scss\';',
-						importer: jsonImporter,
-						includePaths: [
-							path.resolve(__dirname, '..', 'src', 'styles')
-						]
-					}
-				},
-				{
-					loader: 'postcss-loader',
-					options: {
-						plugins: [
-							autoprefixer('last 2 versions', 'ie 10')
-						]
-					}
-				}
+				css,
+				scss
 			]
+			
 		}
 
 	]);
-
+		
 };
 
 /**
- * Use Extract text in production environment
+ * Use Extract text in production or static environment
  */
 
 if (
@@ -93,7 +78,7 @@ if (
 	|| process.env.STATIC
 ) {
 
-	config.module.rules = commonConfig.module.rules.concat([
+	config.module.rules = config.module.rules.concat([
 
 		{
 			test: /\.scss$/,
@@ -101,24 +86,9 @@ if (
 			use: ExtractTextPlugin.extract({
 				fallback: 'style-loader',
 				use: [
-					{
-						loader: 'css-loader',
-						options: {
-							modules: true,
-							importLoaders: 1,
-							localIdentName: '[name]__[local]__[hash:base64:5]'
-						}
-					},
-					{
-						loader: 'sass-loader',
-						options: {
-							data: '@import \'base.scss\';',
-							importer: jsonImporter,
-							includePaths: [
-								path.resolve(__dirname, '..', 'src', 'styles')
-							]
-						}
-					}
+					css,
+					scss,
+					postcss
 				]
 			})
 		}
@@ -132,6 +102,10 @@ if (
 	);
 	
 };
+
+/**
+ * Create static index.html in development or static environment
+ */
 
 if (
 	process.env.NODE_ENV === 'development'
