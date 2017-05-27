@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import clientConfig from './webpack.config.client.babel';
+import clientConfig from './client.babel';
 
 export default Object.assign(clientConfig, {
 

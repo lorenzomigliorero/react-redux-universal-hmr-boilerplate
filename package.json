@@ -31,20 +31,20 @@
       }
     },
     "build:client": {
-      "command": "npm run clean && webpack -p --progress --hide-modules --config tools/webpack.config.client.babel.js",
+      "command": "npm run clean && webpack -p --progress --hide-modules --config tools/webpack-config/client.babel.js",
       "env": {
         "NODE_ENV": "production"
       }
     },
     "build:static": {
-      "command": "npm run clean && webpack -p --progress --hide-modules --config tools/webpack.config.client.babel.js",
+      "command": "npm run clean && webpack -p --progress --hide-modules --config tools/webpack-config/client.babel.js",
       "env": {
         "NODE_ENV": "production",
         "STATIC": true
       }
     },
     "build:server": {
-      "command": "webpack --progress --hide-modules --config tools/webpack.config.server.babel.js",
+      "command": "webpack --progress --hide-modules --config tools/webpack-config/server.babel.js",
       "env": {
         "NODE_ENV": "production",
         "BABEL_ENV": "node"
@@ -70,6 +70,7 @@
     "express-minify-html": "0.11.3",
     "express-static-gzip": "0.2.2",
     "html-minifier": "3.5.2",
+    "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-redux": "5.0.5",
@@ -111,6 +112,7 @@
     "rimraf": "2.6.1",
     "sass-loader": "6.0.5",
     "style-loader": "0.18.1",
+    "url-loader": "0.5.8",
     "webpack": "2.6.0",
     "webpack-assets-manifest": "0.6.2",
     "webpack-dev-middleware": "1.10.2",

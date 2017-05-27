@@ -12,7 +12,7 @@
 			plugins: [
 		        [
 		            "css-modules-transform", {
-		                "preprocessCss": "./tools/babel-scss-loader.js",
+		                "preprocessCss": "./tools/preprocess/babel-scss.js",
 		                "generateScopedName": '[name]__[local]__[hash:base64:8]',
 		                "extensions": [".scss"]
 		            }

@@ -1,7 +1,7 @@
 import Express from 'express';
 import webpack from 'webpack';
 import path from 'path';
-import devConfig from './webpack.config.dev.babel';
+import devConfig from './webpack-config/dev.babel';
 
 const PORT = process.env.PORT;
 const app = new Express();

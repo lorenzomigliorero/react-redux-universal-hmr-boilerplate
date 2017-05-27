@@ -1,5 +1,5 @@
 import sass from 'node-sass';
-import { scss } from './webpack-styles-loaders';
+import { scss } from '../loaders/styles';
 
 module.exports = (data, file) => {
 

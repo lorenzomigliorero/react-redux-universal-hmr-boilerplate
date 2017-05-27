@@ -1,5 +1,5 @@
 import path from 'path';
-import commonConfig from './webpack.config.common.babel';
+import commonConfig from './common.babel';
 import externals from 'webpack-node-externals';
 import webpack from 'webpack';
 
@@ -23,7 +23,7 @@ export default Object.assign(commonConfig, {
 	output: {
 		
 		filename: '[name].js',
-		path:     path.resolve(__dirname, '..', 'dist')
+		path:     path.resolve(__dirname, '..', '..', 'dist')
 
 	},
 

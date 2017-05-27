@@ -1,55 +1,46 @@
 import React, { Component } from 'react';
-import path from 'path';
-import styles from './Image.scss';
-import _ from 'lodash/string';
 import SVGInline from 'react-svg-inline';
+import PropTypes from 'prop-types';
 
 export default class Image extends Component {
 
 	constructor(props) {
+		
 		super(props);
+		this.props = props;
+		
+	}
 
+	get image() {
+	
 		if (this.props.inline) {
-
-			this.image = require(`!raw-loader!../../assets/${props.src}`);
+			
+			let source = require(`!!raw-loader!../../assets/images/${this.props.src}`);
+			return <SVGInline svg={source} />;
 
 		} else {
 
-			this.image = require(`../../assets/${props.src}`);
+			let source = require(`../../assets/images/${this.props.src}`);
+			return <img src={source} />;
 
 		};
-		
-		this.extension = path.extname(props.src).replace('.', '');
+
 
 	}
 
 	render() {
-		
+
 		return (
 
-			<div
-				className={styles.wrapper}
-			>
-				<div className={styles.header}>
-
-					{ _.capitalize(this.extension) } { this.props.inline ? 'inline' : '' }
-				
-				</div>
-
-				<div className={styles.content}>
-					
-					{
-						this.props.inline ? (
-
-							<SVGInline svg={this.image} />
-
-						) : <img src={this.image} />
-					}
-
-				</div>
-			
-			</div>
+			this.image
 
 		);
 	}
-}
+};
+
+Image.propTypes = {
+
+	inline: PropTypes.bool,
+	src: PropTypes.string
+	
+};

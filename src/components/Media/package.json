@@ -1,0 +1,6 @@
+{
+  "name": "Media",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Media.js"
+}

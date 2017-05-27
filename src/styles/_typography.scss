@@ -1,0 +1,13 @@
+@include font-face-woff2('varelaround-regular', '../../assets/fonts/', 'varelaround-regular', 200);
+
+* {
+
+	font-family: 'varelaround-regular', Arial, sans-serif;
+
+}
+
+button {
+
+	@include border-radius(20px);
+
+}

@@ -8,12 +8,6 @@ const Router = require('react-router-dom')[process.env.STATIC ? 'HashRouter' : '
 const store = createStore(reducer);
 
 /**
- * Import styles
- */
-
-require('./styles');
-
-/**
  * Import constant
  */
 

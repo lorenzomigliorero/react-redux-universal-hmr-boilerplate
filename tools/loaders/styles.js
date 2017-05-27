@@ -14,10 +14,10 @@ export const css = {
 export const scss = {
 	loader: 'sass-loader',
 	options: {
-		data: '@import \'base.scss\';',
+		data: '@import \'./styles/base.scss\';',
 		importer: jsonImporter,
 		includePaths: [
-			path.resolve(__dirname, '..', 'src', 'styles')
+			path.resolve(__dirname, '..', '..', 'src')
 		]
 	}
 };

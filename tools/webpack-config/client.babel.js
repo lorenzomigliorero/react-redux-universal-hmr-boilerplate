@@ -2,11 +2,11 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackAssetsManifest from 'webpack-assets-manifest';
-import pkg from '../package.json';
+import pkg from '../../package.json';
 import _ from 'lodash';
 import path from 'path';
-import commonConfig from './webpack.config.common.babel';
-import { scss, css, postcss } from './webpack-styles-loaders';
+import commonConfig from './common.babel';
+import { scss, css, postcss } from '../loaders/styles';
 
 let config = Object.assign(commonConfig, {
 	
@@ -20,7 +20,7 @@ let config = Object.assign(commonConfig, {
 	output: {
 	
 		filename: '[name].js',
-		path:     path.resolve(__dirname, '..', 'dist', 'public')
+		path:     path.resolve(__dirname, '..', '..', 'dist', 'public')
 
 	},
 
