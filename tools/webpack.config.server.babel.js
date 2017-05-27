@@ -36,7 +36,7 @@ export default Object.assign(commonConfig, {
 				exclude: /node_modules/,
 				loader: 'ejs-loader?variable=locals'
 			}
-		
+
 		])
 	
 	},

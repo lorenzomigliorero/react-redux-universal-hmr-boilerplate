@@ -1,48 +1,52 @@
 <%
 
-	var params = typeof(locals) !== 'undefined' ? locals : {};
+    var params = typeof(locals) !== 'undefined' ? locals : {};
+    params = typeof(htmlWebpackPlugin) !== 'undefined' ? htmlWebpackPlugin.options : params;
 
-	params = Object.assign({
+    params = Object.assign({
 
-		title 			: '',
-		description 	: '',
-		markup 			: '',
-		entry			: process.env.BABEL_ENV === 'node'
+        title                   : '',
+        description             : '',
+        markup                  : '',
+        manifest                : '',
+        manifestFileContents    : ''
 
-	}, params);
+    }, params);
 
 %>
 
 <!DOCTYPE html>
 <html lang="en">
-	
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		
-		<title><%= params.title %></title>
-		
-		<meta name="description" content="<%= params.description %>" />
-		
-		<% if (params.entry) { %>
-		
-			<link rel="stylesheet" href="main.css" />
-		
-		<% } %>
-	
-	</head>
-	
-	<body>
-		
-		<div id="root"><%= params.markup %></div>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        
+        <title><%= params.title %></title>
+        
+        <meta name="description" content="<%= params.description %>" />
 
-		<% if (params.entry) { %>
-		
-			<script src="main.js"></script>
-		
-		<% } %>
-	
-	</body>
+        <% if (params.manifest['main.css']) { %>
+        
+            <link rel="stylesheet" href="<%= params.manifest['main.css'] %>" />
+        
+        <% } %>
+    
+    </head>
+    
+    <body>
+        
+        <div id="root"><%= params.markup %></div>
+
+        <% if (params.manifestFileContents) { %>
+        
+            <script><%= params.manifestFileContents %></script>
+            <script src="<%= params.manifest['vendors.js'] %>"></script>
+            <script src="<%= params.manifest['main.js'] %>"></script>
+        
+        <% } %>
+    
+    </body>
 
 </html>

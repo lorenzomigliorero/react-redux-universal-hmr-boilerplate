@@ -16,18 +16,12 @@ export default app
 	.use(require('webpack-dev-middleware')(compiler, {
 		
 		contentBase: `http://localhost:${PORT}`,
-		quiet: true,
-		noInfo: true,
 		hot: true,
-		inline: true,
 		lazy: false,
-		// publicPath: devConfig.output.publicPath,
 		headers: {
 			'Access-Control-Allow-Origin': '*'
 		},
-		stats: {
-			colors: true
-		}
+		stats: 'minimal'
 	
 	}))
 

@@ -5,14 +5,26 @@ import { createStore } from 'redux';
 import { renderToString } from 'react-dom/server';
 import { matchPath, StaticRouter as Router } from 'react-router-dom';
 import routes from './views/routes';
+import fs from 'fs';
 import path from 'path';
+import { minify } from 'html-minifier';
+import compression from 'compression';
 
 const PORT = process.env.PORT;
 
 new Express()
 	
 	.use(Express.static(path.resolve(__dirname, 'public')))
-	
+
+	.use((req, res, next) => {
+
+		res.setHeader('Cache-Control', 'public, max-age=31557600');
+		next();
+
+	})
+
+	.use(compression())
+
 	.get('*', (req, res) => {
 	
 		let route = routes().props.children
@@ -33,23 +45,19 @@ new Express()
 
 		var markup = '';
 		
-		if (process.env.UNIVERSAL) {
+		const App = require('./components/App').default;
+		const reducers = require('./reducers/').default;
+		const store = createStore(reducers);
 
-			const App = require('./components/App').default;
-			const reducers = require('./reducers/').default;
-			const store = createStore(reducers);
+		markup = renderToString(
 
-			markup = renderToString(
-
-				<Provider store={store}>
-					<Router location={req.url} context={context}>
-						<App />
-					</Router>
-				</Provider>
-			
-			);
-
-		};
+			<Provider store={store}>
+				<Router location={req.url} context={context}>
+					<App />
+				</Router>
+			</Provider>
+		
+		);
 
 		let status = 200;
 
@@ -66,13 +74,30 @@ new Express()
 		}
 
 		var template = require('./views/index.ejs');
-
-		return res.status(status).send(template({
-			
-			title: 'My first React App',
-			markup
+		var manifest = require('../dist/public/manifest.json');
+		var manifestFileContents =  fs.readFileSync(`./dist/public/${manifest['manifest.js']}`, 'utf8');
 		
-		}));
+		return res.status(status).send(
+
+			minify(
+
+				template({
+				
+					title: 'My first React App',
+					markup,
+					manifest,
+					manifestFileContents
+
+				}), {
+					
+					removeComments: true,
+					collapseWhitespace: true
+				
+				}
+
+			)
+
+		);
 
 	})
 

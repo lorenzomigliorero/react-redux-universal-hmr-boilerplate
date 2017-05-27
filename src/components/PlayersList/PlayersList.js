@@ -9,6 +9,7 @@ export default class PlayerList extends Component {
 
 	}
 
+
 	render() {
 		return (
 			<ul className={styles.test}>

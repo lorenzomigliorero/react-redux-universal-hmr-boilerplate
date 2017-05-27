@@ -31,7 +31,7 @@
       }
     },
     "build:client": {
-      "command": "webpack -p --progress --hide-modules --config tools/webpack.config.client.babel.js",
+      "command": "npm run clean && webpack -p --progress --hide-modules --config tools/webpack.config.client.babel.js",
       "env": {
         "NODE_ENV": "production"
       }
@@ -51,22 +51,24 @@
       }
     },
     "build": {
-      "command": "npm run clean && npm run build:client && npm run build:server",
+      "command": "npm run build:client && npm run build:server",
       "env": {
         "NODE_ENV": "production"
       }
     },
     "start": {
-      "command": "nodemon dist/server",
+      "command": "node dist/server",
       "env": {
         "PORT": 3000,
-        "UNIVERSAL": true
+        "NODE_ENV": "production"
       }
     }
   },
   "dependencies": {
+    "compression": "1.6.2",
     "express": "4.15.3",
-    "nodemon": "1.11.0",
+    "express-minify-html": "0.11.3",
+    "html-minifier": "3.5.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-redux": "5.0.5",
@@ -86,6 +88,7 @@
     "babel-preset-react": "6.24.1",
     "babel-register": "6.24.1",
     "better-npm-run": "0.0.15",
+    "bundle-loader": "0.5.5",
     "css-loader": "0.28.2",
     "ejs": "2.5.6",
     "ejs-loader": "0.3.0",
@@ -96,6 +99,7 @@
     "file-loader": "0.11.1",
     "html-webpack-plugin": "2.28.0",
     "isomorphic-style-loader": "2.0.0",
+    "lodash": "4.17.4",
     "node-sass": "4.5.3",
     "node-sass-json-importer": "3.0.2",
     "postcss-loader": "2.0.5",
@@ -104,8 +108,10 @@
     "sass-loader": "6.0.5",
     "style-loader": "0.18.1",
     "webpack": "2.6.0",
+    "webpack-assets-manifest": "0.6.2",
     "webpack-dev-middleware": "1.10.2",
     "webpack-hot-middleware": "2.18.0",
+    "webpack-manifest-plugin": "1.1.0",
     "webpack-node-externals": "1.6.0"
   }
 }

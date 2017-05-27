@@ -3,15 +3,15 @@ import clientConfig from './webpack.config.client.babel';
 
 export default Object.assign(clientConfig, {
 
-	entry: {
+	entry: Object.assign(clientConfig.entry, {
 		
 		main: [
 			'webpack/hot/only-dev-server',
 			'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-			...clientConfig.entry.main
+			clientConfig.entry.main
 		]
 	
-	},
+	}),
 
 	plugins: [
 

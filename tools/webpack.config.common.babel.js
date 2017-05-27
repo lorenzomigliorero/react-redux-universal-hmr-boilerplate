@@ -8,16 +8,16 @@ let config = {
 			{
 				// NOTE: https://github.com/MoOx/eslint-loader
 				enforce: 'pre',
-				exclude: /node_modules/,
+				exclude: [/node_modules/],
 				loader:  'eslint-loader',
-				test:    /\.jsx?$/
+				test:    /\.js?$/
 			},
 			{
 				// NOTE: https://github.com/babel/babel-loader
 				enforce: 'post',
-				exclude: /node_modules/,
+				exclude: [/node_modules/],
 				loader:  'babel-loader',
-				test:    /\.jsx?$/
+				test:    /\.js?$/
 			}
 		
 		]
