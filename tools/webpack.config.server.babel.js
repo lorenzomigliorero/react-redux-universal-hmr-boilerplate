@@ -24,7 +24,7 @@ export default Object.assign(commonConfig, {
 		
 		filename: '[name].js',
 		path:     path.resolve(__dirname, '..', 'dist')
-	
+
 	},
 
 	module: {

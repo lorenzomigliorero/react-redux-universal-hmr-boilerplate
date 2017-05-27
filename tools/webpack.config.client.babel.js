@@ -21,7 +21,7 @@ let config = Object.assign(commonConfig, {
 	
 		filename: '[name].js',
 		path:     path.resolve(__dirname, '..', 'dist', 'public')
-	
+
 	},
 
 	plugins: commonConfig.plugins.concat([
@@ -34,7 +34,7 @@ let config = Object.assign(commonConfig, {
 
 		new webpack.optimize.CommonsChunkPlugin({
 			
-			name: !process.env.STATIC ? ['vendors', '../manifest'] : ['vendors'],
+			name: !process.env.STATIC ? ['vendors', `${process.env.NODE_ENV === 'development' ? '' : '../'}manifest`] : ['vendors'],
 			minChunks: Infinity
 		
 		})
@@ -44,6 +44,8 @@ let config = Object.assign(commonConfig, {
 	module: {
 		
 		rules: commonConfig.module.rules.concat([
+
+			
 
 		])
 	

@@ -7,7 +7,7 @@ export const css = {
 	options: {
 		modules: true,
 		importLoaders: 1,
-		localIdentName: '[name]__[local]__[hash:base64:8]'
+		localIdentName: process.env.NODE_ENV === 'development' ? '[name]__[local]' : '[name]__[local]__[hash:base64:8]'
 	}
 };
 

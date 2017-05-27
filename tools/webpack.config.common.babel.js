@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import path from 'path';
 
 let config = {
 	
@@ -18,6 +19,62 @@ let config = {
 				exclude: [/node_modules/],
 				loader:  'babel-loader',
 				test:    /\.js?$/
+			},
+			{
+				test: /\.(jpe?g|png|gif|svg)$/i,
+				exclude: [/node_modules/],
+				loaders: [
+					{
+						loader: 'file-loader',
+						options: {
+							
+							name: process.env.NODE_ENV === 'development' || process.env.static ? '[name].[ext]' : '[name].[hash:8].[ext]',
+							outputPath: 'assets/',
+							emitFile: process.env.BABEL_ENV !== 'node'
+						
+						}
+					},
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							mozjpeg: {
+							
+								quality: 65
+							
+							},
+							pngquant: {
+								
+								quality: 65,
+								speed: 4
+							
+							},
+							svgo: {
+								plugins: [
+									{
+										removeViewBox: false
+									},
+									{
+										removeEmptyAttrs: false
+									}
+								]
+							}
+						}
+					}
+				]
+			},
+			{
+				test: /\.(eot|ttf|otf|woff|woff2|wav|mp3|mp4|ico)$/,
+				loaders: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: process.env.NODE_ENV === 'development' || process.env.static ? '[name].[ext]' : '[name].[hash:8].[ext]',
+							outputPath: 'assets/',
+							emitFile: process.env.BABEL_ENV !== 'node'
+						}
+					}
+					// 'image-webpack'
+				],
 			}
 		
 		]

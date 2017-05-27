@@ -21,22 +21,12 @@ new Express()
 	.use(compression({ threshold: 0 }))
 
 	/**
-	 * Enable long term caching for CSS and JS files!
+	 * Enable long term caching
 	 */
 
 	.use((req, res, next) => {
 
-		let contentType = req.headers['content-type'];
-
-		if (
-			contentType.includes('application/javascript')
-			|| contentType.includes('application/javascript')
-		) {
-			
-			res.setHeader('Cache-Control', 'public, max-age=31557600');
-
-		};
-
+		res.setHeader('Cache-Control', 'public, max-age=31557600');
 		next();
 
 	})
