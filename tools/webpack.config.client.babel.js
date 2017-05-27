@@ -24,7 +24,7 @@ let config = Object.assign(commonConfig, {
 	
 	},
 
-	plugins: [
+	plugins: commonConfig.plugins.concat([
 
 		new webpack.DefinePlugin({
 			
@@ -34,12 +34,12 @@ let config = Object.assign(commonConfig, {
 
 		new webpack.optimize.CommonsChunkPlugin({
 			
-			name: ['vendors', 'manifest'],
+			name: !process.env.STATIC ? ['vendors', '../manifest'] : ['vendors'],
 			minChunks: Infinity
 		
 		})
 
-	],
+	]),
 
 	module: {
 		
@@ -100,7 +100,7 @@ if (
 
 		new WebpackAssetsManifest({
 
-			output:  'manifest.json'
+			output:  '../manifest.json'
 
 		})
 

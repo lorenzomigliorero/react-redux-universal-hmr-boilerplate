@@ -4,28 +4,58 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { renderToString } from 'react-dom/server';
 import { matchPath, StaticRouter as Router } from 'react-router-dom';
-import routes from './views/routes';
 import fs from 'fs';
 import path from 'path';
 import { minify } from 'html-minifier';
 import compression from 'compression';
+import routes from './views/routes';
 
 const PORT = process.env.PORT;
 
 new Express()
 	
-	.use(Express.static(path.resolve(__dirname, 'public')))
+	/**
+	 * Enable GZIP compression for HTML response and static files
+	 */
+
+	.use(compression({ threshold: 0 }))
+
+	/**
+	 * Enable long term caching for CSS and JS files!
+	 */
 
 	.use((req, res, next) => {
 
-		res.setHeader('Cache-Control', 'public, max-age=31557600');
+		let contentType = req.headers['content-type'];
+
+		if (
+			contentType.includes('application/javascript')
+			|| contentType.includes('application/javascript')
+		) {
+			
+			res.setHeader('Cache-Control', 'public, max-age=31557600');
+
+		};
+
 		next();
 
 	})
 
-	.use(compression())
+	/**
+	 * Set express to serve static folder from public
+	 */
+
+	.use(Express.static(path.resolve(__dirname, 'public')))
+
+	/**
+	 * Enable SSR
+	 */
 
 	.get('*', (req, res) => {
+
+		/**
+		 * If route not match with app routes, set 404 as status
+		 */
 	
 		let route = routes().props.children
 			
@@ -43,13 +73,15 @@ new Express()
 			is404: !route
 		};
 
-		var markup = '';
-		
+		/**
+		 * Generate markup string with renderToString method
+		 */
+
 		const App = require('./components/App').default;
 		const reducers = require('./reducers/').default;
 		const store = createStore(reducers);
 
-		markup = renderToString(
+		var markup = renderToString(
 
 			<Provider store={store}>
 				<Router location={req.url} context={context}>
@@ -59,7 +91,11 @@ new Express()
 		
 		);
 
-		let status = 200;
+		/**
+		 * Set properly status code
+		 */
+
+		let status = context.is404 ? 404 : 200;
 
 		/**
 		 * context.url will contain the URL to redirect to if a <Redirect> was used
@@ -69,13 +105,13 @@ new Express()
 			return res.redirect(302, context.url);
 		}
 
-		if (context.is404) {
-			status = 404;
-		}
+		/**
+		 * Generate HTML index page and inject markup string
+		 */
 
-		var template = require('./views/index.ejs');
-		var manifest = require('../dist/public/manifest.json');
-		var manifestFileContents =  fs.readFileSync(`./dist/public/${manifest['manifest.js']}`, 'utf8');
+		const template = require('./views/index.ejs');
+		const manifest = require('../dist/manifest.json');
+		const manifestFileContents =  fs.readFileSync(path.resolve(__dirname, 'dist', manifest['../manifest.js']), 'utf8');
 		
 		return res.status(status).send(
 
@@ -90,8 +126,8 @@ new Express()
 
 				}), {
 					
-					removeComments: true,
-					collapseWhitespace: true
+					collapseWhitespace: true,
+					minifyJS: true
 				
 				}
 
@@ -100,6 +136,10 @@ new Express()
 		);
 
 	})
+
+	/**
+	 * Start server
+	 */
 
 	.listen(PORT, () => {
 

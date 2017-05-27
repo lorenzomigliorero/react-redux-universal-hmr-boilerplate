@@ -44,7 +44,7 @@
       }
     },
     "build:server": {
-      "command": "webpack -p --progress --hide-modules --config tools/webpack.config.server.babel.js",
+      "command": "webpack --progress --hide-modules --config tools/webpack.config.server.babel.js",
       "env": {
         "NODE_ENV": "production",
         "BABEL_ENV": "node"
@@ -68,6 +68,7 @@
     "compression": "1.6.2",
     "express": "4.15.3",
     "express-minify-html": "0.11.3",
+    "express-static-gzip": "0.2.2",
     "html-minifier": "3.5.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
