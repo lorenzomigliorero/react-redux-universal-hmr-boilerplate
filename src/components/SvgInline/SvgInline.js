@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import SVGInline from 'react-svg-inline';
+import SVGInline from 'react-svg-inline';
 import PropTypes from 'prop-types';
 
 export default class Image extends Component {
@@ -13,7 +13,7 @@ export default class Image extends Component {
 
 	get image() {
 	
-		return require(`../../assets/images/${this.props.src}`);
+		return require(`../../assets/svg-inline/${this.props.src}`);
 
 	}
 
@@ -21,7 +21,7 @@ export default class Image extends Component {
 
 		return (
 
-			<img src={this.image} />
+			<SVGInline svg={this.image} />
 
 		);
 	}

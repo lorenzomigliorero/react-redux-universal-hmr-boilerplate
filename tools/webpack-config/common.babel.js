@@ -35,6 +35,21 @@ let config = {
 				]
 			},
 			{
+				enforce: 'pre',
+				test: /\.(svg)$/i,
+				include: path.resolve(__dirname, '..', '..', 'src', 'assets', 'svg-inline'),
+				loaders: [
+
+					'raw-loader',
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							svgo
+						}
+					}
+				]
+			},
+			{
 				enforce: 'post',
 				exclude: /node_modules/,
 				loader:  'babel-loader',

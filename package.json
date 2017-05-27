@@ -67,8 +67,6 @@
   "dependencies": {
     "compression": "1.6.2",
     "express": "4.15.3",
-    "express-minify-html": "0.11.3",
-    "express-static-gzip": "0.2.2",
     "html-minifier": "3.5.2",
     "prop-types": "15.5.10",
     "react": "15.5.4",

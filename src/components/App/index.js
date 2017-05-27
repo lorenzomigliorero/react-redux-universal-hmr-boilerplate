@@ -7,6 +7,7 @@ import pkg from '../../../package.json';
 import Box from '../Box';
 import Media from '../Media';
 import Image from '../Image';
+import SvgInline from '../SvgInline';
 
 import PlayersListContainer from '../../containers/PlayersListContainer';
 
@@ -51,10 +52,10 @@ export default (props) => (
 					<Image src='react.png' />
 				</Box>
 				<Box header='svg'>
-					<Image src='tiger.svg' />
+					<Image src='redux.svg' />
 				</Box>
 				<Box header='svg inline'>
-					<Image src='redux.svg' inline={true} />
+					<SvgInline src='tiger.svg'></SvgInline>
 				</Box>
 				<Box header='jpg'>
 					<Image src='webpack.jpg' />
