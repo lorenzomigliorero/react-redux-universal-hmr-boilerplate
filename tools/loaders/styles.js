@@ -1,32 +1,65 @@
-import path from  'path';
+import path from 'path';
 import jsonImporter from 'node-sass-json-importer';
 import autoprefixer from 'autoprefixer';
+import postcssModulesValues from 'postcss-modules-values';
 
 export const css = {
 	loader: 'css-loader',
 	options: {
 		modules: true,
 		importLoaders: 1,
-		localIdentName: process.env.NODE_ENV === 'development' ? '[name]__[local]' : '[name]__[local]__[hash:base64:8]'
+		localIdentName: '[name]__[local]'
 	}
 };
 
-export const scss = {
-	loader: 'sass-loader',
-	options: {
-		data: '@import \'./styles/base.scss\';',
-		importer: jsonImporter,
-		includePaths: [
-			path.resolve(__dirname, '..', '..', 'src')
-		]
-	}
+if (process.env.NODE_ENV === 'development') {
+
+	css.options.sourceMap = true;
+
+};
+
+if (process.env.NODE_ENV === 'production') {
+
+	css.options.localIdentName = '[hash:base64:5]';
+
 };
 
 export const postcss = {
 	loader: 'postcss-loader',
 	options: {
-		plugins: [
-			autoprefixer('last 2 versions', 'ie 10')
+		sourceMap: process.env.NODE_ENV === 'development',
+		syntax: process.env.BABEL_ENV ? require('postcss-scss') : 'postcss-scss'
+	}
+
+};
+
+if (process.env.NODE_ENV === 'production') {
+
+	postcss.options.plugins = () => [
+	
+		postcssModulesValues,
+
+		autoprefixer(
+			'last 2 versions',
+			'ie 10'
+		)
+
+	];
+
+};
+
+export const scss = {
+	loader: 'sass-loader',
+	options: {
+		importer: jsonImporter,
+		includePaths: [
+			path.resolve(__dirname, '..', '..', 'src', 'styles')
 		]
 	}
+};
+
+if (process.env.NODE_ENV === 'development') {
+
+	scss.options.sourceMap = true;
+
 };

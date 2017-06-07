@@ -47,7 +47,7 @@ new Express()
 		 * If route not match with app routes, set 404 as status
 		 */
 	
-		let route = routes().props.children
+		const route = routes().props.children
 			
 			.map(i => ({
 				path: i.props.path,
@@ -67,11 +67,11 @@ new Express()
 		 * Generate markup string with renderToString method
 		 */
 
-		const App = require('./components/App').default;
-		const reducers = require('./reducers/').default;
+		const App = require('./components/App');
+		const reducers = require('./reducers/');
 		const store = createStore(reducers);
 
-		var markup = renderToString(
+		const markup = renderToString(
 
 			<Provider store={store}>
 				<Router location={req.url} context={context}>
@@ -85,7 +85,7 @@ new Express()
 		 * Set properly status code
 		 */
 
-		let status = context.is404 ? 404 : 200;
+		const status = context.is404 ? 404 : 200;
 
 		/**
 		 * context.url will contain the URL to redirect to if a <Redirect> was used
@@ -101,7 +101,7 @@ new Express()
 
 		const template = require('./views/index.ejs');
 		const manifest = require('../dist/manifest.json');
-		const manifestFileContents =  fs.readFileSync(path.resolve(__dirname, 'dist', manifest['../manifest.js']), 'utf8');
+		const manifestFileContents = fs.readFileSync(path.resolve(__dirname, 'dist', manifest['../manifest.js']), 'utf8');
 		
 		return res.status(status).send(
 

@@ -1,13 +1,52 @@
-.test {
+@value font-size-lg, font-size-sm from "modules/_font-size.scss";
+@value font-family-serif from "modules/_font-family.scss";
+@value color-primary, color-secondary from "modules/_color.scss";
+@value display-block, display-flex from "modules/_display.scss";
 
-	color: map-get($colors, "primary");
+@value text-capitalize from "modules/_text.scss";
+@value flex-1, flex-v-center from "modules/_flex.scss";
+@value spacer-v-1 from "modules/_spacer.scss";
+
+.wrapper {
+
+	padding: 0;
+
+}
+
+.list {
+	
+	padding: 0;
+
+}
+
+.item {
+	
+	composes: display-flex flex-v-center spacer-v-1;
+	border-bottom: 1px solid gray;
+
+}
+
+.label {
+
+	composes: flex-1 text-capitalize;
 
 }
 
 .odd {
 
-	display: flex;
+	composes: font-family-serif color-secondary;
 
-	color: red;
+}
+
+.button {
+
+	width: 120px;
+	composes: font-size-sm;
+	
+}
+
+.add {
+
+	width: 100%;
 
 }

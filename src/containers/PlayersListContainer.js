@@ -26,13 +26,13 @@ const mapDispatchToProps = (dispatch) => {
 
 		addPlayer: () => {
 			
-			dispatch( new actions.addPlayer() );
+			dispatch(new actions.addPlayer());
 		
 		},
 
 		removePlayer(p) {
 
-			dispatch( new actions.removePlayer(p) );
+			dispatch(new actions.removePlayer(p));
 		
 		}
 

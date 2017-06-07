@@ -37,6 +37,12 @@ let config = Object.assign(commonConfig, {
 			name: !process.env.STATIC ? ['vendors', `${process.env.NODE_ENV === 'development' ? '' : '../'}manifest`] : ['vendors'],
 			minChunks: Infinity
 		
+		}),
+
+		new webpack.NoEmitOnErrorsPlugin(),
+
+		new webpack.LoaderOptionsPlugin({
+			debug: true
 		})
 
 	]),
@@ -44,9 +50,7 @@ let config = Object.assign(commonConfig, {
 	module: {
 		
 		rules: commonConfig.module.rules.concat([
-
 			
-
 		])
 	
 	}
@@ -59,6 +63,9 @@ let config = Object.assign(commonConfig, {
 
 if (process.env.NODE_ENV === 'development') {
 	
+	// devtool: 'nosources-source-map',
+	config.devtool = 'eval';
+
 	config.module.rules = config.module.rules.concat([
 
 		{
@@ -68,7 +75,8 @@ if (process.env.NODE_ENV === 'development') {
 			use: [
 				'style-loader',
 				css,
-				scss
+				scss,
+				postcss
 			]
 			
 		}
@@ -76,39 +84,6 @@ if (process.env.NODE_ENV === 'development') {
 	]);
 		
 };
-
-/**
- * Long term caching
- */
-
-if (
-	process.env.NODE_ENV === 'production'
-	&& !process.env.STATIC
-) {
-
-	config.output.filename = '[name].[chunkhash:8].js';
-
-	config.plugins.push(
-
-		/**
-		 * Configure webpack to choose ids in a deterministic way.
-		 */
-
-		new webpack.NamedModulesPlugin(),
-		
-		/**
-		 * Extract assets url with hash in json file
-		 */
-
-		new WebpackAssetsManifest({
-
-			output:  '../manifest.json'
-
-		})
-
-	);
-
-}
 
 /**
  * Use Extract text in production or static environment
@@ -147,6 +122,39 @@ if (
 	);
 	
 };
+
+/**
+ * Long term caching
+ */
+
+if (
+	process.env.NODE_ENV === 'production'
+	&& !process.env.STATIC
+) {
+
+	config.output.filename = '[name].[chunkhash:5].js';
+
+	config.plugins.push(
+
+		/**
+		 * Configure webpack to choose ids in a deterministic way.
+		 */
+
+		new webpack.NamedModulesPlugin(),
+		
+		/**
+		 * Extract assets url with hash in json file
+		 */
+
+		new WebpackAssetsManifest({
+
+			output:  '../manifest.json'
+
+		})
+
+	);
+
+}
 
 /**
  * Create static index.html in development or static environment

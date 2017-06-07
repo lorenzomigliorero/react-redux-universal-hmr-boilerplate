@@ -8,9 +8,9 @@ import NotFound from './NotFound';
 export default () => (
 
 	<Switch>
-		<Route exact path='/' component={Home}></Route>
-		<Route exact path='/about' component={About}></Route>
-		<Route component={NotFound}></Route>
+		<Route exact path='/' component={Home} />
+		<Route exact path='/about' component={About} />
+		<Route component={NotFound} />
 	</Switch>
 	
 );

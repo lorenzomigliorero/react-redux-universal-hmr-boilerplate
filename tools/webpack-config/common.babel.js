@@ -1,7 +1,7 @@
 import webpack from 'webpack';
+import path from 'path';
 import { mozjpeg, pngquant, svgo } from '../loaders/images';
 import files from '../loaders/files';
-import path from 'path';
 
 let config = {
 	
@@ -11,8 +11,8 @@ let config = {
 			{
 				enforce: 'pre',
 				exclude: /node_modules/,
-				loader:  'eslint-loader',
-				test:    /\.js?$/
+				loader: 'eslint-loader',
+				test: /\.js?$/
 			},
 			{
 				enforce: 'pre',
@@ -51,9 +51,9 @@ let config = {
 			},
 			{
 				enforce: 'post',
+				test: /\.js?$/,
 				exclude: /node_modules/,
-				loader:  'babel-loader',
-				test:    /\.js?$/
+				use: 'babel-loader'
 			},
 			{
 				test: /\.(ttf|eot|woff|woff2|svg)$/,
@@ -74,7 +74,7 @@ let config = {
 						outputPath: 'assets/media/'
 					})
 				]
-			}
+			},
 
 		]
 	
@@ -87,7 +87,16 @@ let config = {
 			'.jsx',
 			'.json',
 			'.scss'
-		]
+		],
+
+		alias: {
+			components: path.resolve(__dirname, '..', '..', 'src', 'components'),
+			containers: path.resolve(__dirname, '..', '..', 'src', 'containers'),
+			reducers: path.resolve(__dirname, '..', '..', 'src', 'reducers'),
+			state: path.resolve(__dirname, '..', '..', 'src', 'state'),
+			modules: path.resolve(__dirname, '..', '..', 'src', 'styles', 'modules'),
+			views: path.resolve(__dirname, '..', '..', 'src', 'views')
+		}
 
 	},
 

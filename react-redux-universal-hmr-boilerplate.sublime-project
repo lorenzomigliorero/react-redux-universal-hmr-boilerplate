@@ -81,9 +81,6 @@
 			],
 			"name": "------Production------",
 			"path": "dist"
-		},
-		{
-			"path": "C:\\xampp\\htdocs\\devkit\\CF-react-universal-boilerplate"
 		}
 	]
 }

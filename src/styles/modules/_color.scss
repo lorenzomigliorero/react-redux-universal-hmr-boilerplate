@@ -1,0 +1,40 @@
+@import 'helpers/mixins';
+@import 'variables';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define color property for element
+ * @param  {String} $prefix 		Class prefix, related to breakpoint: xs sm md lg
+ * @param  {Object} $colors 		Object with key value color { primary: violet }
+
+ * @Example
+ * .color-primary -> color: violet
+
+ * @Classes:
+ *
+ * .color-primary
+ * .color-secondary
+ * ...etc
+ */
+
+@mixin color(
+	$prefix: '',
+	$colors: $colors
+) {
+
+	@each $label, $value in $colors {
+		
+		.#{$prefix}color-#{$label} {
+			color: $value;
+		}
+
+	}
+
+}
+
+@include color();
+@include breakpoint(xs) {@include color(xs-);};
+@include breakpoint(sm) {@include color(sm-);};
+@include breakpoint(md) {@include color(md-);};
+@include breakpoint(lg) {@include color(lg-);};

@@ -1,0 +1,37 @@
+@import 'helpers/mixins';
+@import 'variables';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define font-family property for element
+ * @param  {Object} $fonts-family 	Object with key value color { sans-serif: Arial }
+
+ * @Example
+ * .font-family-sans-serif -> font-family: Arial
+
+ * @Classes:
+ *
+ * .font-family-sans-serif
+ * .font-family-sans-serif-bold
+ * .font-family-sm
+ * ...etc
+ */
+
+@mixin font-family(
+	$font-family: map-get($typography, font-family)
+) {
+
+	@each $label, $value in $font-family {
+		
+		.font-family-#{$label} {
+
+			@include map-to-style(map-get($font-family, $label));
+		
+		}
+
+	}
+
+}
+
+@include font-family();

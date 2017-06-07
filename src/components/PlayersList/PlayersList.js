@@ -1,33 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './PlayersList.scss';
 
-export default class PlayerList extends Component {
+export default (props) => {
 	
-	constructor(props) {
-
-		super(props);
-
-	}
-
-
-	render() {
-		return (
-			<ul className={styles.test}>
-
+	return (
+		<div className={styles.wrapper}>
+			<ul className={styles.list}>
+			
 				{
-					this.props.players.map((i, index) => (
-
-						<li key={index} className={index % 2 === 0 ? styles.odd : ''}>
-							{i.name}
-							<button onClick={() => this.props.removePlayer(i)}>Remove player {i.name}</button>
+					props.players.map((i, index) => (
+			
+						<li
+							key={index}
+							className={`${styles.item} ${index % 2 === 0 ? styles.odd : ''}`}
+						>
+							<span className={styles.label}>{i.name}</span>
+							<button
+								onClick={() => props.removePlayer(i)}
+								className={styles.button}
+							>Remove player {i.name}</button>
 						</li>
-
+			
 					))
 				}
-
-				<button onClick={this.props.addPlayer}>ADD PLAYER</button>
-
+			
 			</ul>
-		);
-	}
+			
+			<button onClick={props.addPlayer} className={`${styles.button} ${styles.add}`}>ADD PLAYER</button>
+
+		</div>
+	);
+
 };

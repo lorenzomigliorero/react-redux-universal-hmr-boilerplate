@@ -1,21 +1,18 @@
 import { combineReducers } from 'redux';
-import { routeReducer } from 'redux-simple-router';
-
-import Players from '../state/Players/';
-
-let reducers = {};
+import { routeReducer as routing } from 'redux-simple-router';
+import { reducer as players } from 'state/Players/';
 
 // require
 // 	.context('../state', true, /index.js/)
 // 	.keys()
 // 	.forEach(i => {
 		
-// 		let state = require(`../state/${i.replace('./', '')}`).default;
+// 		let state = require(`../state/${i.replace('./', '')}`);
 // 		reducers[state.constants.NAME] = state.reducer;
 
 // 	});
 
-export default combineReducers(Object.assign(reducers, {
-	players: Players.reducer,
-	routing: routeReducer
-}));
+export default combineReducers({
+	players,
+	routing
+});

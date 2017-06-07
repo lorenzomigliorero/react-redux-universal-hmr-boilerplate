@@ -1,0 +1,36 @@
+@import 'helpers/mixins';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define interaction behaviour for element
+ * @param  {String} $prefix 		Class prefix, related to breakpoint: xs sm md lg
+
+ * @Example
+ * .interaction-none -> interaction-none: user-select: none; cursor: default;
+
+ * @Classes:
+ *
+ * .interaction-none
+ * .interaction-events-none
+ */
+
+@mixin interaction($prefix: '') {
+
+	.#{$prefix}interaction-none {
+		user-select: none;
+		cursor: default;
+	}
+
+	.#{$prefix}interaction-events-none {
+		user-select: none;
+		pointer-events: none;
+	}
+
+}
+
+@include interaction();
+@include breakpoint(xs) {@include interaction(xs-);};
+@include breakpoint(sm) {@include interaction(sm-);};
+@include breakpoint(md) {@include interaction(md-);};
+@include breakpoint(lg) {@include interaction(lg-);};

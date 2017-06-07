@@ -1,1 +1,96 @@
-@import '../constant/index.json';
+$spacers: (
+	
+	unit: 12px,
+	multipliers: 0 1 2 3 4
+
+);
+
+$colors: (
+
+	primary: red,
+	secondary: green
+
+);
+
+$breakpoints: (
+
+	xs: 'max-width: 47.9375rem', 	// 767px
+	sm: 'min-width: 48em', 			// 768px
+	md: 'min-width: 64em', 			// 992px
+	lg: 'min-width: 100em' 			// 1200px
+
+);
+
+$typography: (
+	
+	font-family: (
+
+		sans-serif: (
+			
+			font-family: ('varelaround-regular', Arial sans-serif)
+
+		),
+
+		serif: (
+			
+			font-family: ('Playfair Display', serif)
+
+		)
+
+	),
+
+	size: (
+
+		xs: (
+			
+			font-size: 0.75rem,
+			line-height: 1.5
+		
+		),
+		
+		sm: (
+		
+			font-size: 0.875rem,
+			line-height: 1.3
+		
+		),
+		
+		md: (
+		
+			font-size: 1.125rem,
+			line-height: 1.2
+		
+		),
+		
+		lg: (
+		
+			font-size: 1.5rem,
+			line-height: 1.8
+		
+		),
+
+		xl: (
+		
+			font-size: 3rem,
+			line-height: 1
+		
+		)
+		
+	)
+
+);
+
+$z-index: (
+
+	header: 1,
+	footer: 2
+
+);
+
+$grid: (
+
+	columns: 12,
+	gutterWidth: 12px,
+	maxWidth: 1650px
+
+);

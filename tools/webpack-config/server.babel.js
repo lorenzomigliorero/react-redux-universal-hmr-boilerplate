@@ -23,7 +23,7 @@ export default Object.assign(commonConfig, {
 	output: {
 		
 		filename: '[name].js',
-		path:     path.resolve(__dirname, '..', '..', 'dist')
+		path: path.resolve(__dirname, '..', '..', 'dist')
 
 	},
 

@@ -1,0 +1,169 @@
+@import 'helpers/mixins';
+@import 'variables';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define layout properties for element
+ * @param  {Object} $z-index 		Object with key value z-index { header: 1 }
+
+ * @Example
+ * .layout-z-index-header -> z-index: 1
+
+ * @Classes:
+ *
+ * .layout-rel
+ * .layout-abs
+ * .layout-fix
+ * .layout-t-0
+ * .layout-r-0
+ * .layout-l-0
+ * .layout-b-0
+ * .layout-tl-0
+ * .layout-tr-0
+ * .layout-t-center
+ * .layout-bl-0
+ * .layout-br-0
+ * .layout-auto
+ * .layout-float-l
+ * .layout-float-r
+ * .layout-full
+ * .layout-full-h
+ * .layout-width-auto
+ * .layout-height-auto
+ * .layout-full-v
+ * .layout-full-fix
+ * .layout-full-abs
+ * .layout-o-hidden
+ * -layout-v-align-middle
+ * .layout-z-index-header
+ * .layout-z-index-footer
+ * ...etc
+ */
+
+@mixin layout(
+	$prefix: '',
+	$z-index: $z-index
+) {
+
+	.#{$prefix}layout-rel {
+		position: relative;
+	}
+
+	.#{$prefix}layout-abs {
+		position: absolute;
+	}
+
+	.#{$prefix}layout-fix {
+		position: fixed;
+	}
+	
+	.#{$prefix}layout-t-0 {
+		top: 0;
+	}
+
+	.#{$prefix}layout-r-0 {
+		right: 0;
+	}
+
+	.#{$prefix}layout-l-0 {
+		left: 0;
+	}
+
+	.#{$prefix}layout-b-0 {
+		bottom: 0;
+	}
+
+	.#{$prefix}layout-tl-0 {
+		top: 0;
+		left: 0;
+	}
+
+	.#{$prefix}layout-tr-0 {
+		top: 0;
+		right: 0;
+	}
+
+	.#{$prefix}layout-t-center {
+		top: 50%;
+	}
+
+	.#{$prefix}layout-bl-0 {
+		bottom: 0;
+		left: 0;
+	}
+
+	.#{$prefix}layout-br-0 {
+		bottom: 0;
+		right: 0;
+	}
+
+	.#{$prefix}layout-auto {
+		top: auto;
+		right: auto;
+		bottom: auto;
+		left: auto;
+	}
+
+	.#{$prefix}layout-float-l {
+		float: left;
+	}
+
+	.#{$prefix}layout-float-r {
+		float: right;
+	}
+	
+	.#{$prefix}layout-full {
+		width: 100%;
+		height: 100%;
+	}
+
+	.#{$prefix}layout-full-h {
+		width: 100%;
+	}
+
+	.#{$prefix}layout-width-auto {
+		width: auto;
+	}
+
+	.#{$prefix}layout-height-auto {
+		height: auto;
+	}
+
+	.#{$prefix}layout-full-v {
+		height: 100%;
+	}
+
+	.#{$prefix}layout-full-fix {
+		@include full-pos(fixed)
+	}
+
+	.#{$prefix}layout-full-abs {
+		@include full-pos(absolute)
+	}
+
+	.#{$prefix}layout-o-hidden {
+		overflow: hidden;
+	}
+
+	.#{$prefix}layout-v-align-middle {
+		display: inline-block;
+		vertical-align: middle;
+		float: none;
+	}
+
+	@each $label, $value in $z-index {
+		
+		.#{$prefix}layout-z-index-#{$label} {
+			z-index: $value;
+		}
+
+	}
+
+}
+
+@include layout();
+@include breakpoint(xs) {@include layout(xs-);};
+@include breakpoint(sm) {@include layout(sm-);};
+@include breakpoint(md) {@include layout(md-);};
+@include breakpoint(lg) {@include layout(lg-);};

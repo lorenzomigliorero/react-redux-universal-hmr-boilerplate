@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import SVGInline from 'react-svg-inline';
 import PropTypes from 'prop-types';
 
 export default class Image extends Component {
@@ -21,7 +20,7 @@ export default class Image extends Component {
 
 		return (
 
-			<img src={this.image} />
+			<img alt='' src={this.image} />
 
 		);
 	}
@@ -29,6 +28,6 @@ export default class Image extends Component {
 
 Image.propTypes = {
 
-	src: PropTypes.string
-	
+	src: PropTypes.string.isRequired
+
 };

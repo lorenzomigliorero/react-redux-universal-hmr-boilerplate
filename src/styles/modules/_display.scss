@@ -1,0 +1,56 @@
+@import 'helpers/mixins';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define display property for element
+ * @param  {String} $prefix 		Class prefix, related to breakpoint: xs sm md lg
+
+ * @Example
+ * .xs-display-block -> display: block (Only on mobile)
+
+ * @Classes:
+ *
+ * .display-inline
+ * .display-inline-block
+ * .display-block
+ * .display-none
+ * .display-flex
+ * .display-inline-flex
+ */
+
+@mixin display(
+	$prefix: ''
+) {
+
+	.#{$prefix}display-inline {
+		display: inline;
+	}
+
+	.#{$prefix}display-inline-block {
+		display: inline-block;
+	}
+
+	.#{$prefix}display-block {
+		display: block;
+	}
+
+	.#{$prefix}display-none {
+		display: none;
+	}
+
+	.#{$prefix}display-flex {
+		display: flex;
+	}
+
+	.#{$prefix}display-inline-flex {
+		display: inline-flex;
+	}	
+
+}
+
+@include display();
+@include breakpoint(xs) {@include display(xs-);};
+@include breakpoint(sm) {@include display(sm-);};
+@include breakpoint(md) {@include display(md-);};
+@include breakpoint(lg) {@include display(lg-);};

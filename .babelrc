@@ -12,15 +12,20 @@
 			plugins: [
 		        [
 		            "css-modules-transform", {
-		                "preprocessCss": "./tools/preprocess/babel-scss.js",
-		                "generateScopedName": '[name]__[local]__[hash:base64:8]',
-		                "extensions": [".scss"]
+						"preprocessCss": "./tools/preprocess/babel-scss.js",
+						"generateScopedName": '[hash:base64:5]',
+						"extensions": [".scss"]
 		            }
-		        ]
+				]
 		    ]
-		
+
 		}
 
-	}
+	},
+
+	"plugins": [
+		"transform-object-rest-spread",
+		"add-module-exports"
+	]
 
 }

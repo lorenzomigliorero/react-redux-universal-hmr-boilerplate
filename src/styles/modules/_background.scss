@@ -1,0 +1,104 @@
+@import 'helpers/mixins';
+@import 'variables';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define background property for element
+ * @param  {String} $prefix 		Class prefix, related to breakpoint: xs sm md lg
+ * @param  {Object} $colors 		Object with key value color { primary: violet }
+
+ * @Example
+ * .xs-background-primary -> background-color: violet (only on mobile)
+
+ * @Classes:
+ *
+ * .background-primary
+ * .background-secondary
+ * ...etc
+ * .background-transparent
+ * .background-cover
+ * .background-contain
+ * .background-left-top
+ * .background-center-top
+ * .background-right-top
+ * .background-left-center
+ * .background-center
+ * .background-right-center
+ * .background-left-bottom
+ * .background-center-bottom
+ * .background-right-bottom
+ */
+
+@mixin background(
+	$prefix: '',
+	$colors: $colors
+) {
+
+	@each $label, $value in $colors {
+		
+		.#{$prefix}background-#{$label} {
+			background-color: $value;
+		}
+
+	}
+
+	.#{$prefix}background-transparent {
+		background-color: transparent;
+	}
+
+	.#{$prefix}background-cover {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+
+	.#{$prefix}background-contain {
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+
+	.#{$prefix}background-left-top {
+		background-position: left top;
+	}
+
+	.#{$prefix}background-center-top {
+		background-position: center top;
+	}
+
+	.#{$prefix}background-right-top {
+		background-position: right top;
+	}
+
+	.#{$prefix}background-left-center {
+		background-position: left center;
+	}
+
+	.#{$prefix}background-center {
+		background-position: center center;
+	}
+
+	.#{$prefix}background-right-center {
+		background-position: right center;
+	}
+
+	.#{$prefix}background-left-bottom {
+		background-position: left bottom;
+	}
+
+	.#{$prefix}background-center-bottom {
+		background-position: center bottom;
+	}
+
+	.#{$prefix}background-right-bottom {
+		background-position: right bottom;
+	}
+
+}
+
+@include background();
+@include breakpoint(xs) {@include background(xs-);};
+@include breakpoint(sm) {@include background(sm-);};
+@include breakpoint(md) {@include background(md-);};
+@include breakpoint(lg) {@include background(lg-);};

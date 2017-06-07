@@ -11,7 +11,7 @@ export default class Media extends Component {
 
 	get media() {
 
-		let source = require(`../../assets/media/${this.props.src}`);
+		const source = require(`../../assets/media/${this.props.src}`);
 		return <video src={source} />;
 
 	}

@@ -1,0 +1,44 @@
+@import 'helpers/mixins';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define cursor property for element
+ * @param  {String} $prefix 		Class prefix, related to breakpoint: xs sm md lg
+
+ * @Example
+ * .xs-cursor-pointer -> cursor: pointer (Only on mobile)
+
+ * @Classes:
+ *
+ * .cursor-open-hand
+ * .cursor-closed-hand
+ * .cursor-pointer
+ * .cursor-default
+ */
+
+@mixin cursor($prefix: '') {
+
+	.#{$prefix}cursor-open-hand {
+		cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfgBw4ONBrEuT2GAAAAcElEQVRIx+2SQRLAIAgDE/7/5/TQjkqntqA9sjcdSYIAeAQhBVshQEj9ijEBO8sFoXv7U0RghqIC5NNrRXLYlv0lIGjMkBuD3T8w599a0GzG/BYgF4L7BCTWsdclZVRgIwPd2qT9xxYWUxiKoih+4gAweh8T5R3TVQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wNy0xNFQxNDo1MjoyNiswMjowMLLJBJMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDctMTRUMTQ6NTI6MjYrMDI6MDDDlLwvAAAAAElFTkSuQmCC) 7 5, auto;
+	}
+
+	.#{$prefix}cursor-closed-hand {
+		cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfgBw4OMyxEQj7YAAAAWklEQVRIx+2TMQpAIQxDk/Lvf+U6SfsVpBbHvCGLrSYBAfEQhy9agnPdARBZ0+kB+5sIBRwVH/MCcktUwy7nN75ooIcd+y2XSLYdxOYSo/Z+jtB0YfqCQohXDMUVFA8UdQkzAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE2LTA3LTE0VDE0OjUxOjQ0KzAyOjAwCA6nPgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNi0wNy0xNFQxNDo1MTo0NCswMjowMHlTH4IAAAAASUVORK5CYII=) 7 5, auto;
+	}
+
+	.#{$prefix}cursor-pointer {
+		cursor: pointer;
+	}
+
+	.#{$prefix}cursor-default {
+		cursor: default;
+	}
+
+}
+
+@include cursor();
+@include breakpoint(xs) {@include cursor(xs-);};
+@include breakpoint(sm) {@include cursor(sm-);};
+@include breakpoint(md) {@include cursor(md-);};
+@include breakpoint(lg) {@include cursor(lg-);};

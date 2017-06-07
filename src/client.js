@@ -8,24 +8,18 @@ const Router = require('react-router-dom')[process.env.STATIC ? 'HashRouter' : '
 const store = createStore(reducer);
 
 /**
- * Import constant
- */
-
-require('./constant');
-
-/**
  * Render App component
  */
 
 const renderComponent = () => {
 
-	const App = require('./components/App').default;
+	const App = require('./components/App');
 
 	return (
 
 		<Provider store={store}>
 			<Router>
-				<App></App>
+				<App />
 			</Router>
 		</Provider>
 
@@ -36,7 +30,6 @@ const renderComponent = () => {
 /**
  * Render App on first client render
  */
-
 render(renderComponent(), document.getElementById('root'));
 
 /**
@@ -46,6 +39,6 @@ render(renderComponent(), document.getElementById('root'));
 if (module.hot) {
 	
 	module.hot.accept('./components/App', () => render(renderComponent(), document.getElementById('root')));
-	module.hot.accept('./reducers', () => store.replaceReducer(require('./reducers').default));
+	module.hot.accept('./reducers', () => store.replaceReducer(require('./reducers')));
 
 };

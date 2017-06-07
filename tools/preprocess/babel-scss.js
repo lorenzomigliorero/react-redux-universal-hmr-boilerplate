@@ -1,13 +1,21 @@
 import sass from 'node-sass';
-import { scss } from '../loaders/styles';
+import postcss from 'postcss';
+import { scss, postcss as postcssconfig } from '../loaders/styles';
 
 module.exports = (data, file) => {
 
 	try {
-		
+
 		return sass.renderSync(Object.assign(scss.options, {
-			data: `${scss.options.data} ${data}`,
+		
+			data: postcss(postcssconfig.options.plugins).process(data.replace(/modules\//g, '../../styles/modules/'), {
+			
+				syntax: postcssconfig.options.syntax
+			
+			}).css,
+
 			file
+		
 		})).css.toString('utf8');
 	
 	} catch (e) {
@@ -15,5 +23,7 @@ module.exports = (data, file) => {
 		console.error(e);
 	
 	}
+
+	return false;
 
 };

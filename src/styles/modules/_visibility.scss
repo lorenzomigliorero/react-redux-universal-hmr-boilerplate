@@ -1,0 +1,34 @@
+@import 'helpers/mixins';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define visibility property for element
+ * @param  {String} $prefix 		Class prefix, related to breakpoint: xs sm md lg
+
+ * @Example
+ * .xs-visibility-oacity-0 -> opacity: 0 (Only on mobile)
+
+ * @Classes:
+ *
+ * .visibility-opacity-0
+ * .visibility-hidden
+ */
+
+@mixin visibility($prefix: '') {
+
+	.#{$prefix}visibility-opacity-0 {
+		opacity: 0
+	}
+
+	.#{$prefix}visibility-hidden {
+		visibility: hidden;
+	}
+
+}
+
+@include visibility();
+@include breakpoint(xs) {@include visibility(xs-);};
+@include breakpoint(sm) {@include visibility(sm-);};
+@include breakpoint(md) {@include visibility(md-);};
+@include breakpoint(lg) {@include visibility(lg-);};

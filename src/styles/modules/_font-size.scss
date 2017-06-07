@@ -1,0 +1,43 @@
+@import 'helpers/mixins';
+@import 'helpers/mixins';
+@import 'variables';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define font-size property for element
+ * @param  {Object} $fonts-family 	Object with key value color { sans-serif: Arial }
+
+ * @Example
+ * .font-size-sans-serif -> font-size: Arial
+
+ * @Classes:
+ *
+ * .font-size-sans-serif
+ * .font-size-sans-serif-bold
+ * .font-size-sm
+ * ...etc
+ */
+
+@mixin font-size(
+	$prefix: '',
+	$font-size: map-get($typography, size)
+) {
+
+	@each $label, $value in $font-size {
+		
+		.#{$prefix}font-size-#{$label} {
+								  
+			@include map-to-style(map-get($font-size, $label));
+		
+		}
+
+	}
+
+}
+
+@include font-size();
+@include breakpoint(xs) {@include font-size(xs-);};
+@include breakpoint(sm) {@include font-size(sm-);};
+@include breakpoint(md) {@include font-size(md-);};
+@include breakpoint(lg) {@include font-size(lg-);};

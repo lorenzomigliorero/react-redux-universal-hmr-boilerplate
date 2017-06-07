@@ -1,0 +1,51 @@
+@import 'helpers/mixins';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define overflow property for element
+ * @param  {String} $prefix 		Class prefix, related to breakpoint: xs sm md lg
+
+ * @Example
+ * .xs-overflow-hidden -> overflow: hidden (Only on mobile)
+
+ * @Classes:
+ *
+ * .overflow-hidden
+ * .overflow-scroll
+ * .overflow-scroll-v
+ * .overflow-scroll-h
+ */
+
+@mixin overflow($prefix: '') {
+
+	.#{$prefix}overflow-hidden {
+		overflow: hidden;
+	}
+
+	.#{$prefix}overflow-scroll {
+		overflow-y: scroll;
+		overflow-x: scroll;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.#{$prefix}overflow-scroll-v {
+		overflow-y: scroll;
+		overflow-x: hidden;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.#{$prefix}overflow-scroll-h {
+		overflow-x: scroll;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+	}
+
+
+}
+
+@include overflow();
+@include breakpoint(xs) {@include overflow(xs-);};
+@include breakpoint(sm) {@include overflow(sm-);};
+@include breakpoint(md) {@include overflow(md-);};
+@include breakpoint(lg) {@include overflow(lg-);};

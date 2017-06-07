@@ -1,0 +1,123 @@
+@import 'helpers/mixins';
+
+/**
+ * Author: Lorenzo Migliorero
+ *
+ * Define flex behaviour for element
+ * @param  {String} $prefix 		Class prefix, related to breakpoint: xs sm md lg
+
+ * @Example
+ * .flex-row -> flex-direction: row
+ * .xs-flex-1 -> flex: 1 (Only on mobile)
+
+ * @Classes:
+ *
+ * .flex-column
+ * .flex-row
+ * .flex-row-reverse
+ * .flex-h-left
+ * .flex-h-right
+ * .flex-v-top
+ * .flex-v-bottom
+ * .flex-center
+ * .flex-v-center
+ * .flex-h-center
+ * .flex-space-between
+ * .flex-space-around
+ * .flex-1
+ * .flex-v-baseline
+ * .flex-nowrap
+ * .flex-wrap
+ * .flex-order-0
+ * .flex-order-1
+ * .flex-order-2
+ */
+
+@mixin flex(
+	$prefix: ''
+) {
+
+	.#{$prefix}flex-column {
+		flex-direction: column;
+	}
+
+	.#{$prefix}flex-row {
+		flex-direction: row;
+	}
+
+	.#{$prefix}flex-row-reverse {
+		flex-direction: row-reverse;
+	}
+
+	.#{$prefix}flex-h-left {
+		justify-content: flex-start;
+	}
+
+	.#{$prefix}flex-h-right {
+		justify-content: flex-end;
+	}
+	
+	.#{$prefix}flex-v-top {
+		align-items: flex-start;
+	}
+
+	.#{$prefix}flex-v-bottom {
+		align-items: flex-end;
+	}
+
+	.#{$prefix}flex-center {
+		align-items: center;
+		justify-content: center;
+	}
+
+	.#{$prefix}flex-v-center {
+		align-items: center;
+	}
+
+	.#{$prefix}flex-h-center {
+		justify-content: center;
+	}
+
+	.#{$prefix}flex-space-between {
+		justify-content: space-between;
+	}
+
+	.#{$prefix}flex-space-around {
+		justify-content: space-around;
+	}
+
+	.#{$prefix}flex-1 {
+		flex: 1;
+	}
+
+	.#{$prefix}flex-v-baseline {
+		align-items: baseline;
+	}
+
+	.#{$prefix}flex-nowrap {
+		flex-wrap: nowrap;
+	}
+
+	.#{$prefix}flex-wrap {
+		flex-wrap: wrap;
+	}
+
+	.#{$prefix}flex-order-0 {
+		order: 0;
+	}
+
+	.#{$prefix}flex-order-1 {
+		order: 1;
+	}
+
+	.#{$prefix}flex-order-2 {
+		order: 2;
+	}
+
+}
+
+@include flex();
+@include breakpoint(xs) {@include flex(xs-);};
+@include breakpoint(sm) {@include flex(sm-);};
+@include breakpoint(md) {@include flex(md-);};
+@include breakpoint(lg) {@include flex(lg-);};

@@ -29,6 +29,6 @@ export default class Image extends Component {
 
 Image.propTypes = {
 
-	src: PropTypes.string
+	src: PropTypes.string.isRequired
 	
 };
