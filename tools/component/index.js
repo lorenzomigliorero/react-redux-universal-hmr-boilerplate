@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
-import { camelCase, capitalize } from 'lodash/string';
+import { camelCase, upperFirst } from 'lodash/string';
 
 const componentsDir = './src/components';
 
@@ -15,7 +15,7 @@ const createComponent = () => {
 					type: 'input',
 					name: 'name',
 					message: 'Type the name of the component:',
-					filter: (name) => capitalize(camelCase(name)),
+					filter: (name) => upperFirst(camelCase(name)),
 					validate: (name) => {
 						const existingComponents = fs.readdirSync(componentsDir).filter(file => fs.lstatSync(path.join(componentsDir, file)).isDirectory());
 						const expression = !(name === '') && !existingComponents.includes(name);
