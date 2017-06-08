@@ -115,7 +115,8 @@ if (
 
 		new ExtractTextPlugin({
 			
-			filename: process.env.STATIC ? 'style.css' : 'style.[contenthash:5].css'
+			filename: process.env.STATIC ? 'style.css' : 'style.[contenthash:5].css',
+			ignoreOrder: true
 		
 		})
 
