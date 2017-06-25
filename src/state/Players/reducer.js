@@ -1,3 +1,5 @@
+import { ADD_PLAYER, REMOVE_PLAYER } from './constants';
+
 const initialState = [
 	{
 
@@ -23,7 +25,7 @@ export default (state = initialState, action) => {
 	
 	switch (action.type) {
 
-	case 'ADD_PLAYER': {
+	case ADD_PLAYER: {
 		
 		const id = newState.length + 1;
 		newState.push(
@@ -35,7 +37,7 @@ export default (state = initialState, action) => {
 		return newState;
 	}
 
-	case 'REMOVE_PLAYER': {
+	case REMOVE_PLAYER: {
 
 		return newState.filter(i => i.id !== action.data.player.id);
 
