@@ -11,6 +11,7 @@
 		"no-console": 0,
 		"comma-dangle": 0,
 		"no-trailing-spaces": 0,
+		"no-nested-ternary": 0,
 		"no-tabs": 0,
 		"no-plusplus": 0,
 		"indent": ["error", "tab"],

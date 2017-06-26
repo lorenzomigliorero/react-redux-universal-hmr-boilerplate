@@ -169,7 +169,7 @@ if (
 	config.plugins.push(
 		
 		new HtmlWebpackPlugin({
-			template: './src/views/index.ejs',
+			template: './src/index.ejs',
 			filename: 'index.html',
 			title: _.startCase(pkg.name),
 			description: pkg.description

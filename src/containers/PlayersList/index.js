@@ -1,20 +1,14 @@
 import { connect } from 'react-redux';
-import Players from '../state/Players';
-import PlayersList from '../components/PlayersList';
+import Players from 'state/Players';
+import PlayersList from 'components/PlayersList';
 
 const { actions } = Players;
-
-const container = (state) => {
-    
-	return state;
-
-};
 
 const mapStateToProps = (state) => {
 
 	return {
 
-		players: container(state.players)
+		players: state.players
 
 	};
 

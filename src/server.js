@@ -1,14 +1,16 @@
 import Express from 'express';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import { renderToString } from 'react-dom/server';
 import { matchPath, StaticRouter as Router } from 'react-router-dom';
+import Helmet from 'react-helmet';
 import fs from 'fs';
 import path from 'path';
 import { minify } from 'html-minifier';
 import compression from 'compression';
-import routes from './views/routes';
+import routes from './router/routes';
 
 const PORT = process.env.PORT;
 
@@ -44,86 +46,107 @@ new Express()
 	.get('*', (req, res) => {
 
 		/**
-		 * If route not match with app routes, set 404 as status
+		 * Create empty Redux initial state
 		 */
 	
-		const route = routes().props.children
-			
-			.map(i => ({
-				path: i.props.path,
-				exact: i.props.exact,
-				strict: false
-			}))
-			
-			.filter(i => i.path)
-			
-			.find(i => matchPath(req.url, i));
-
-		const context = {
-			is404: !route
-		};
-
-		/**
-		 * Generate markup string with renderToString method
-		 */
-
-		const App = require('./components/App');
+		const App = require('./containers/App');
 		const reducers = require('./reducers/');
-		const store = createStore(reducers);
+		const initialState = {};
 
-		const markup = renderToString(
-
-			<Provider store={store}>
-				<Router location={req.url} context={context}>
-					<App />
-				</Router>
-			</Provider>
+		const store = createStore(reducers, initialState, compose(
+			applyMiddleware(thunkMiddleware)
+		));
 		
-		);
-
 		/**
-		 * Set properly status code
+		 * Create promises array, using loadData function of every matched route
 		 */
 
-		const status = context.is404 ? 404 : 200;
+		const promises = [];
+
+		routes.some(route => {
+
+			const match = matchPath(req.url, route);
+
+			if (
+				match
+				&& route.loadData
+			) {
+
+				promises.push(route.loadData(match, store.dispatch));
+
+			}
+
+			return match;
+
+		});
 
 		/**
-		 * context.url will contain the URL to redirect to if a <Redirect> was used
+		 * When all data are fetched and Redux Store are populated,
+		 * create render to string method
 		 */
 
-		if (context.url) {
-			return res.redirect(302, context.url);
-		}
+		Promise.all(promises).then(data => {
 
-		/**
-		 * Generate HTML index page and inject markup string
-		 */
+			const route = routes.find(i => matchPath(req.url, i));
 
-		const template = require('./views/index.ejs');
-		const manifest = require('../dist/manifest.json');
-		const manifestFileContents = fs.readFileSync(path.resolve(__dirname, 'dist', manifest['../manifest.js']), 'utf8');
-		
-		return res.status(status).send(
+			const context = {
+				status: route.path ? 200 : route.to ? 302 : 404
+			};
 
-			minify(
+			/**
+			 * Generate markup string with renderToString method
+			 */
 
-				template({
-				
-					title: 'My first React App',
-					markup,
-					manifest,
-					manifestFileContents
+			const markup = renderToString(
 
-				}), {
+				<Provider store={store}>
+					<Router location={req.url} context={context}>
+						<App />
+					</Router>
+				</Provider>
+			
+			);
+
+			/**
+			 * If status is 302, redirect to new url
+			 */
+
+			if (context.status === 302) {
+				return res.redirect(302, context.url);
+			}
+
+			/**
+			 * Generate HTML index page and inject markup string
+			 */
+
+			const template = require('./index.ejs');
+			const manifest = require('../dist/manifest.json');
+			const manifestFileContents = fs.readFileSync(path.resolve(__dirname, 'dist', manifest['../manifest.js']), 'utf8');
+			
+			return res.status(context.status).send(
+
+				minify(
+
+					template({
 					
-					collapseWhitespace: true,
-					minifyJS: true
-				
-				}
+						helmet: Helmet.rewind(),
+						state: store.getState(),	
+						markup,
+						manifest,
+						manifestFileContents
 
-			)
+					}), {
+						
+						collapseWhitespace: true,
+						minifyJS: true
+					
+					}
 
-		);
+				)
+
+			);
+
+		});
 
 	})
 

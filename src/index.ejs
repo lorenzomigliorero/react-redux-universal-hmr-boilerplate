@@ -5,8 +5,8 @@
 
     params = Object.assign({
 
-        title                   : '',
-        description             : '',
+        helmet                  : {},
+        state                   : null,
         markup                  : '',
         manifest                : '',
         manifestFileContents    : ''
@@ -23,9 +23,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         
-        <title><%= params.title %></title>
-        
-        <meta name="description" content="<%= params.description %>" />
+        <% if (params.helmet.title) { %><%= params.helmet.title %><% } %>
 
         <% if (params.manifest['main.css']) { %>
         
@@ -38,6 +36,12 @@
     <body>
         
         <div id="root"><%= params.markup %></div>
+
+        <% if (params.state) { %>
+
+            <script>window.__REDUX_STATE__ = <%= JSON.stringify(params.state) %></script>
+
+        <% } %>
 
         <% if (params.manifestFileContents) { %>
         
