@@ -12,7 +12,7 @@ import { minify } from 'html-minifier';
 import compression from 'compression';
 import routes from './router/routes';
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 new Express()
 	
