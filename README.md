@@ -1,6 +1,6 @@
 # React Redux Universal HMR Boilerplate
 
-[![Travis](https://img.shields.io/travis/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/lorenzomigliorero/react-redux-universal-hmr-boilerplate) [![David](https://img.shields.io/david/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg)]() [![David](https://img.shields.io/david/dev/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg)]()
+[![Travis](https://img.shields.io/travis/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/lorenzomigliorero/react-redux-universal-hmr-boilerplate) [![David](https://img.shields.io/david/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg?maxAge=2592000&style=flat-square)]() [![David](https://img.shields.io/david/dev/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg?maxAge=2592000&style=flat-square)]()
 
 * Webpack v3
 * HMR (also for reducers) in development mode
