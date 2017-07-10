@@ -94,7 +94,6 @@ yarn start
 ```
 
 ## Contributing
-[https://github.com/michalkvasnicak/babel-plugin-css-modules-transform](https://github.com/michalkvasnicak/babel-plugin-css-modules-transform)
 
 [https://github.com/claudiocalautti](https://github.com/claudiocalautti)
 
