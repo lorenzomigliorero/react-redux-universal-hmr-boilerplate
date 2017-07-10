@@ -25,25 +25,25 @@
 @mixin font-face-woff2($name, $path, $filename: $name, $weight: normal, $style: normal) {
 	@font-face {
 		font-family: $name;
+		font-weight: $weight;
+		font-style: $style;
 		src:
 			url('#{$path}/#{$filename}/#{$filename}.woff2') format('woff2'),
 			url('#{$path}/#{$filename}/#{$filename}.woff') format('woff');
-		font-weight: $weight;
-		font-style: $style;
 	}
 }
 
 @mixin font-face($prefix, $path: '../assets/fonts/') {
 	@font-face {
 		font-family: $prefix;
+		font-weight: normal;
+		font-style: normal;
 		src: url($path + $prefix + '/' + $prefix + '.eot');
 		src:
 			url($path + $prefix + '/' + $prefix + '.woff2') format('woff2'),
 			url($path + $prefix + '/' + $prefix + '.woff') format('woff'),
 			url($path + $prefix + '/' + $prefix + '.ttf') format('truetype'),
 			url($path + $prefix + '/' + $prefix + '.svg#' + str-replace($prefix, '-', '')) format('svg');
-		font-weight: normal;
-		font-style: normal;
 	}
 }
 
