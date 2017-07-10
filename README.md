@@ -16,8 +16,7 @@
 ## How it works
 
 This boilerplate uses React Router v4, with server side rendering.
-SSR for CSS modules doesn't require https://github.com/kriasoft/isomorphic-style-loader, the syntax remains the same, no extra wrapper function for component is needed.
-The server-side rendering of CSS modules use `css-modules-transform`, with a custom simple preprocess, which recreates the webpack loaders flux on every required scss.
+SSR for CSS modules use `css-loader/locals`, no extra wrapper function for component is needed.
 
 * [Installation](#installation)
 * [Development](#development)
@@ -96,4 +95,7 @@ yarn start
 
 ## Contributing
 [https://github.com/michalkvasnicak/babel-plugin-css-modules-transform](https://github.com/michalkvasnicak/babel-plugin-css-modules-transform)
+
 [https://github.com/claudiocalautti](https://github.com/claudiocalautti)
+
+[https://github.com/dwightjack/umeboshi-cli](https://github.com/dwightjack/umeboshi-cli)
