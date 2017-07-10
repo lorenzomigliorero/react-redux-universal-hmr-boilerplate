@@ -18,10 +18,10 @@ export default app
 		contentBase: `http://localhost:${PORT}`,
 		hot: true,
 		lazy: false,
+		stats: 'minimal',
 		headers: {
 			'Access-Control-Allow-Origin': '*'
-		},
-		stats: 'minimal'
+		}
 	
 	}))
 

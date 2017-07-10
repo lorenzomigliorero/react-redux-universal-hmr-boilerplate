@@ -6,7 +6,7 @@ import pkg from '../../package.json';
 import _ from 'lodash';
 import path from 'path';
 import commonConfig from './common.babel';
-import { scss, css, postcss } from '../loaders/styles';
+import stylesLoaders from '../loaders/styles';
 
 let config = Object.assign(commonConfig, {
 	
@@ -24,7 +24,9 @@ let config = Object.assign(commonConfig, {
 
 	},
 
-	plugins: commonConfig.plugins.concat([
+	plugins: [
+
+		...commonConfig.plugins,
 
 		new webpack.DefinePlugin({
 			
@@ -45,15 +47,7 @@ let config = Object.assign(commonConfig, {
 			debug: true
 		})
 
-	]),
-
-	module: {
-		
-		rules: commonConfig.module.rules.concat([
-			
-		])
-	
-	}
+	]
 
 });
 
@@ -66,22 +60,17 @@ if (process.env.NODE_ENV === 'development') {
 	// devtool: 'nosources-source-map',
 	config.devtool = 'eval';
 
-	config.module.rules = config.module.rules.concat([
+	config.module.rules.push(
 
 		{
 
 			test: /\.scss$/,
 			exclude: /node_modules/,
-			use: [
-				'style-loader',
-				css,
-				scss,
-				postcss
-			]
+			use: ['style-loader'].concat(stylesLoaders)
 			
 		}
 
-	]);
+	);
 		
 };
 
@@ -94,22 +83,18 @@ if (
 	|| process.env.STATIC
 ) {
 
-	config.module.rules = config.module.rules.concat([
+	config.module.rules.push(
 
 		{
 			test: /\.scss$/,
 			exclude: /node_modules/,
 			use: ExtractTextPlugin.extract({
 				fallback: 'style-loader',
-				use: [
-					css,
-					scss,
-					postcss
-				]
+				use: stylesLoaders
 			})
 		}
 
-	]);
+	);
 
 	config.plugins.push(
 

@@ -9,12 +9,6 @@ import { Grid, Row, Col } from 'components/Grid/';
 
 import PlayersListContainer from 'containers/PlayersList';
 
-/**
- * Require main styles
- */
-
-require('./App.scss');
-
 export default (props) => {
 	
 	return (

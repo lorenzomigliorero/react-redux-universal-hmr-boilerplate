@@ -2,3 +2,4 @@ node_modules
 dist
 *.log
 *.sublime-workspace
+*.DS_Store

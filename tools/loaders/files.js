@@ -4,7 +4,7 @@ export default ({ outputPath = '' }) => ({
 		
 		name: process.env.NODE_ENV === 'development' || process.env.static ? '[name].[ext]' : '[name].[hash:5].[ext]',
 		outputPath: outputPath,
-		emitFile: process.env.BABEL_ENV !== 'node'
+		emitFile: !process.env.SSR
 	
 	}
 });

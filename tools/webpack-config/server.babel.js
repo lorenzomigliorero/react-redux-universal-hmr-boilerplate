@@ -3,6 +3,9 @@ import commonConfig from './common.babel';
 import externals from 'webpack-node-externals';
 import webpack from 'webpack';
 
+import stylesLoaders from '../loaders/styles';
+
+
 export default Object.assign(commonConfig, {
 	
 	target: 'node',
@@ -29,27 +32,27 @@ export default Object.assign(commonConfig, {
 
 	module: {
 		
-		rules: commonConfig.module.rules.concat([
-		
+		rules: [
+
+			...commonConfig.module.rules,
+
+			{
+
+				test: /\.scss$/,
+				exclude: /node_modules/,
+				use: stylesLoaders
+				
+			},
+
 			{
 				test: /\.ejs$/,
 				exclude: /node_modules/,
 				loader: 'ejs-loader?variable=locals'
 			}
 
-		])
+		]
 	
 	},
-
-	plugins: commonConfig.plugins.concat([
-
-		new webpack.DefinePlugin({
-			
-			'process.env.BABEL_ENV': JSON.stringify(process.env.BABEL_ENV)
-
-		})
-
-	]),
 
 	externals: [
 

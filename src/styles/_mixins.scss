@@ -1,5 +1,27 @@
 @import 'variables';
 
+/**---Function---**/
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}
+
+/**---Mixins---**/
+
 @mixin font-face-woff2($name, $path, $filename: $name, $weight: normal, $style: normal) {
 	@font-face {
 		font-family: $name;
@@ -139,27 +161,5 @@
     content: "";
     width: 100%;
     padding-top: ($height / $width) * 100%;
-  }
-}
-
-@mixin breakpoint($class) {
-  @if $class == xs {
-    @media (map-get($breakpoints, xs)) { @content; }
-  }
- 
-  @else if $class == sm {
-    @media (map-get($breakpoints, sm)) { @content; }
-  }
- 
-  @else if $class == md {
-    @media (map-get($breakpoints, md)) { @content; }
-  }
- 
-  @else if $class == lg {
-    @media (map-get($breakpoints, lg)) { @content; }
-  }
- 
-  @else {
-    @warn "Breakpoint mixin supports: xs, sm, md, lg";
   }
 }

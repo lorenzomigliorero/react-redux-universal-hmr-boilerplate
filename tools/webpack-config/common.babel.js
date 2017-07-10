@@ -2,12 +2,14 @@ import webpack from 'webpack';
 import path from 'path';
 import { mozjpeg, pngquant, svgo } from '../loaders/images';
 import files from '../loaders/files';
+import stylesLoaders from '../loaders/styles';
 
 let config = {
 	
 	module: {
 		
 		rules: [
+
 			{
 				enforce: 'pre',
 				exclude: /node_modules/,
@@ -94,7 +96,7 @@ let config = {
 			containers: path.resolve(__dirname, '..', '..', 'src', 'containers'),
 			reducers: path.resolve(__dirname, '..', '..', 'src', 'reducers'),
 			state: path.resolve(__dirname, '..', '..', 'src', 'state'),
-			modules: path.resolve(__dirname, '..', '..', 'src', 'styles', 'modules'),
+			utilities: path.resolve(__dirname, '..', '..', 'src', 'styles', 'utilities'),
 			views: path.resolve(__dirname, '..', '..', 'src', 'views')
 		}
 

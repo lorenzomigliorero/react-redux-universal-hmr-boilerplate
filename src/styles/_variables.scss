@@ -1,7 +1,6 @@
 $spacers: (
 	
-	unit: 12px,
-	multipliers: 0 1 2 3 4
+	unit: 12px
 
 );
 
@@ -12,12 +11,28 @@ $colors: (
 
 );
 
-$breakpoints: (
+$mq-breakpoints: (
+	
+	mobile: 480px,
+	s-tablet: 768px,
+	l-tablet: 992px,
+	desktop: 1200px
 
-	xs: 'max-width: 47.9375rem', 	// 767px
-	sm: 'min-width: 48em', 			// 768px
-	md: 'min-width: 64em', 			// 992px
-	lg: 'min-width: 100em' 			// 1200px
+);
+
+$flexboxgrid: (
+
+	columns: 12,
+	gutterWidth: map-get($spacers, unit),
+	maxWidth: 1650px,
+	breakpoints: (
+		
+		xs: 'max-width: #{map-get($mq-breakpoints, s-tablet) -1}',
+		sm: 'min-width: #{map-get($mq-breakpoints, s-tablet)}',
+		md: 'min-width: #{map-get($mq-breakpoints, l-tablet)}',
+		lg: 'min-width: #{map-get($mq-breakpoints, desktop)}'
+
+	)
 
 );
 
@@ -84,13 +99,5 @@ $z-index: (
 
 	header: 1,
 	footer: 2
-
-);
-
-$grid: (
-
-	columns: 12,
-	gutterWidth: 12px,
-	maxWidth: 1650px
 
 );

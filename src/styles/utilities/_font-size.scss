@@ -1,0 +1,26 @@
+@import 'mixins';
+@import 'variables';
+
+/**
+ * Author: Lorenzo Migliorero
+ * Define font-size property for element
+
+ * @Example
+ * .u-font-size-sm -> font-size: 0.80rem; line-height: 1.2;
+
+ * @Classes:
+ *
+ * .u-font-size-sm
+ * .u-font-size-md
+ * ...etc
+ */
+
+@each $label, $value in map-get($typography, size) {
+	
+	.u-font-size-#{$label} {
+
+		@include map-to-style(map-deep-get($typography, size, $label));
+	
+	}
+
+}

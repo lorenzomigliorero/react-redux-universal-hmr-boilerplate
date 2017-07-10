@@ -1,10 +1,10 @@
 @import "variables";
 
-$flexboxgrid-grid-columns: map-get($grid, columns);
-$flexboxgrid-gutter-width: map-get($grid, gutterWidth);
-$flexboxgrid-max-width: map-get($grid, maxWidth);
-$gutter-compensation: $flexboxgrid-gutter-width * -1;
-$flexboxgrid-breakpoints: $breakpoints;
+$flexboxgrid-grid-columns: map-get($flexboxgrid, columns);
+$flexboxgrid-gutter-width: map-get($flexboxgrid, gutterWidth);
+$flexboxgrid-max-width: map-get($flexboxgrid, maxWidth);
+$gutter-compensation: map-get($flexboxgrid, gutterWidth) * -1;
+$flexboxgrid-breakpoints: map-get($flexboxgrid, breakpoints);
 
 @mixin col-common() {
 	width: 100%;

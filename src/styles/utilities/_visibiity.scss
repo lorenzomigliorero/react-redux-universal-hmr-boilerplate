@@ -1,0 +1,34 @@
+@import 'mixins';
+
+/**
+ * Author: Lorenzo Migliorero
+ * Define element visibility
+
+ * @Example
+ * .u-hidden -> display: none!mportant;
+
+ * @Classes:
+ *
+ * .u-hidden
+ */
+
+.u-hidden {
+	display: none!important;
+}
+
+@each $mq-key, $mq-value in $mq-breakpoints {
+
+    @include mq($mq-key) {
+
+        .u-hidden--from-#{$mq-key} {
+            display: none !important;
+        }
+    }
+
+    @include mq($until: $mq-key) {
+
+        .u-hidden--until-#{$mq-key} {
+            display: none !important;
+        }
+    }
+}

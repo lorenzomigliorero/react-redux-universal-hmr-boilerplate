@@ -1,21 +1,15 @@
 @import 'variables';
-@import 'helpers/mixins';
-@import 'helpers/functions';
+@import 'mixins';
 
-@include font-face-woff2('varelaround-regular', '../../assets/fonts/');
+/**---Font-face declaration---**/
+
+
+@include font-face-woff2('varelaround-regular', '../assets/fonts/');
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display:700');
-
-:global {
-	
-	@import 'modules/font-size';
-	@import 'modules/font-family';
-	
-}
 
 body {
 
-	@extend .font-size-sm;
-	@extend .font-family-sans-serif;
+	@include map-to-style(map-deep-get($typography, font-family, sans-serif));
 
 }
 
@@ -26,18 +20,6 @@ h4,
 h5,
 h6 {
 
-	@extend .font-family-serif;
-
-}
-
-h1 {
-
-	@extend .font-size-xl;
-
-}
-
-h2 {
-	
-	@extend .font-size-md;
+	@include map-to-style(map-deep-get($typography, font-family, serif));
 
 }

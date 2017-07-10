@@ -1,11 +1,8 @@
-@value font-size-lg, font-size-sm from "modules/_font-size.scss";
-@value font-family-serif from "modules/_font-family.scss";
-@value color-primary, color-secondary from "modules/_color.scss";
-@value display-block, display-flex from "modules/_display.scss";
+//@value font-size-lg, font-size-sm from "utilities/_font-size.scss";
+//@value font-family-serif from "utilities/_font-family.scss";
 
-@value text-capitalize from "modules/_text.scss";
-@value flex-1, flex-v-center from "modules/_flex.scss";
-@value spacer-v-1 from "modules/_spacer.scss";
+@import 'variables';
+@import "sass-mq/mq";
 
 .wrapper {
 
@@ -21,27 +18,32 @@
 
 .item {
 	
-	composes: display-flex flex-v-center spacer-v-1;
+	display: flex;
+	align-items: center;
+	padding-top: map-get($spacers, unit);
+	padding-bottom: map-get($spacers, unit);
 	border-bottom: 1px solid gray;
 
 }
 
 .label {
 
-	composes: flex-1 text-capitalize;
+	flex: 1;
+	text-transform: capitalize;
 
 }
 
 .odd {
 
-	composes: font-family-serif color-secondary;
+	color: map-get($colors, secondary);
+	//composes: font-family-serif;
 
 }
 
 .button {
 
 	width: 120px;
-	composes: font-size-sm;
+	//composes: font-size-sm;
 	
 }
 

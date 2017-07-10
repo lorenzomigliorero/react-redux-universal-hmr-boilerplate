@@ -19,6 +19,13 @@ const store = createStore(reducers, initialState, compose(
 	applyMiddleware(thunkMiddleware)
 ));
 
+
+/**
+ * Require main styles
+ */
+
+require('./styles/index.scss');
+
 /**
  * Render App component
  */
