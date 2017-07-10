@@ -10,6 +10,10 @@ import fs from 'fs';
 import path from 'path';
 import { minify } from 'html-minifier';
 import compression from 'compression';
+import App from './containers/App';
+import reducers from './reducers/';
+import template from './index.ejs';
+import manifest from '../dist/manifest.json';
 import routes from './router/routes';
 
 const PORT = process.env.PORT || 3000;
@@ -49,8 +53,7 @@ new Express()
 		 * Create empty Redux initial state
 		 */
 	
-		const App = require('./containers/App');
-		const reducers = require('./reducers/');
+		
 		const initialState = {};
 
 		const store = createStore(reducers, initialState, compose(
@@ -119,8 +122,6 @@ new Express()
 			 * Generate HTML index page and inject markup string
 			 */
 
-			const template = require('./index.ejs');
-			const manifest = require('../dist/manifest.json');
 			const manifestFileContents = fs.readFileSync(path.resolve(__dirname, 'dist', manifest['../manifest.js']), 'utf8');
 			
 			return res.status(context.status).send(
