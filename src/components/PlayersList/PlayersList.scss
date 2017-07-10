@@ -5,50 +5,36 @@
 @import "sass-mq/mq";
 
 .wrapper {
-
 	padding: 0;
-
 }
 
 .list {
-	
 	padding: 0;
-
 }
 
 .item {
-	
 	display: flex;
 	align-items: center;
 	padding-top: map-get($spacers, unit);
 	padding-bottom: map-get($spacers, unit);
 	border-bottom: 1px solid gray;
-
 }
 
 .label {
-
 	flex: 1;
 	text-transform: capitalize;
-
 }
 
 .odd {
-
 	color: map-get($colors, secondary);
 	//composes: font-family-serif;
-
 }
 
 .button {
-
 	width: 120px;
 	//composes: font-size-sm;
-	
 }
 
 .add {
-
 	width: 100%;
-
 }

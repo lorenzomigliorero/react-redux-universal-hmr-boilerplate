@@ -13,22 +13,22 @@
  */
 
 .u-hidden {
-	display: none!important;
+	display: none !important;
 }
 
 @each $mq-key, $mq-value in $mq-breakpoints {
 
-    @include mq($mq-key) {
+	@include mq($mq-key) {
 
-        .u-hidden--from-#{$mq-key} {
-            display: none !important;
-        }
-    }
+		.u-hidden--from-#{$mq-key} {
+			display: none !important;
+		}
+	}
 
-    @include mq($until: $mq-key) {
+	@include mq($until: $mq-key) {
 
-        .u-hidden--until-#{$mq-key} {
-            display: none !important;
-        }
-    }
+		.u-hidden--until-#{$mq-key} {
+			display: none !important;
+		}
+	}
 }

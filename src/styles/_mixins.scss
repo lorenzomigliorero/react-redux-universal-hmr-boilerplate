@@ -1,32 +1,33 @@
 @import 'variables';
 
-/**---Function---**/
+/** ---Function--- **/
 
 @function str-replace($string, $search, $replace: '') {
-  $index: str-index($string, $search);
+	$index: str-index($string, $search);
 
-  @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
-  }
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
 
-  @return $string;
+	@return $string;
 }
 
 @function map-deep-get($map, $keys...) {
-    @each $key in $keys {
-        $map: map-get($map, $key);
-    }
+	@each $key in $keys {
+		$map: map-get($map, $key);
+	}
 
-    @return $map;
+	@return $map;
 }
 
-/**---Mixins---**/
+/** ---Mixins--- **/
 
 @mixin font-face-woff2($name, $path, $filename: $name, $weight: normal, $style: normal) {
 	@font-face {
 		font-family: $name;
-		src: url('#{$path}/#{$filename}/#{$filename}.woff2') format('woff2'),
-			 url('#{$path}/#{$filename}/#{$filename}.woff') format('woff');
+		src:
+			url('#{$path}/#{$filename}/#{$filename}.woff2') format('woff2'),
+			url('#{$path}/#{$filename}/#{$filename}.woff') format('woff');
 		font-weight: $weight;
 		font-style: $style;
 	}
@@ -36,24 +37,21 @@
 	@font-face {
 		font-family: $prefix;
 		src: url($path + $prefix + '/' + $prefix + '.eot');
-		src: url($path + $prefix + '/' + $prefix + '.woff2') format('woff2'),
+		src:
+			url($path + $prefix + '/' + $prefix + '.woff2') format('woff2'),
 			url($path + $prefix + '/' + $prefix + '.woff') format('woff'),
 			url($path + $prefix + '/' + $prefix + '.ttf') format('truetype'),
 			url($path + $prefix + '/' + $prefix + '.svg#' + str-replace($prefix, '-', '')) format('svg');
-		    font-weight: normal;
-		    font-style: normal;
+		font-weight: normal;
+		font-style: normal;
 	}
 }
 
 @mixin map-to-style($object) {
-	
 	@each $property, $value in $object {
-
 		#{$property}: $value;
-
 	}
-	
-};
+}
 
 @mixin transform-center($position: relative) {
 	position: $position;
@@ -78,44 +76,86 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-left: - $width / 2;
-	margin-top: - $height / 2;
 	width: $width;
 	height: $height;
+	margin-top: - $height / 2;
+	margin-left: - $width / 2;
 }
 
 @mixin placeholder($color:#666, $autoreference: false) {
-	
 	@if $autoreference {
-		&::-webkit-input-placeholder {color: $color;}
-		&:-moz-placeholder {color: $color;}
-		&::-moz-placeholder {color: $color;}
-		&:-ms-input-placeholder {color: $color;}
+
+		&::-webkit-input-placeholder {
+			color: $color;
+		}
+
+		&:-moz-placeholder {
+			color: $color;
+		}
+
+		&::-moz-placeholder {
+			color: $color;
+		}
+
+		&:-ms-input-placeholder {
+			color: $color;
+		}
 	} @else {
-		::-webkit-input-placeholder {color: $color;}
-		:-moz-placeholder {color: $color;}
-		::-moz-placeholder {color: $color;}
-		:-ms-input-placeholder {color: $color;}
+
+		::-webkit-input-placeholder {
+			color: $color;
+		}
+
+		:-moz-placeholder {
+			color: $color;
+		}
+
+		::-moz-placeholder {
+			color: $color;
+		}
+
+		:-ms-input-placeholder {
+			color: $color;
+		}
 	}
-	.placeholder{color: $color;}
+
+	.placeholder {
+		color: $color;
+	}
 }
 
 @mixin selection($bg-color:#666, $color:#fff, $autoreference: false) {
 	@if $autoreference {
-		&::selection {background: $bg-color; color: $color;}
-		&::-moz-selection {background: $bg-color; color: $color;}
+
+		&::selection {
+			background: $bg-color;
+			color: $color;
+		}
+
+		&::-moz-selection {
+			background: $bg-color;
+			color: $color;
+		}
 	} @else {
-		::selection {background: $bg-color; color: $color;}
-		::-moz-selection {background: $bg-color; color: $color;}
+
+		::selection {
+			background: $bg-color;
+			color: $color;
+		}
+
+		::-moz-selection {
+			background: $bg-color;
+			color: $color;
+		}
 	}
 }
 
 @mixin scrollbar($color:#777, $bg-color: transparent, $autoreference: false, $radius: 4px, $width: 8px) {
 	@if $autoreference {
-		
+
 		&::-webkit-scrollbar {
-		    width: $width;
-		    height: $width;
+			width: $width;
+			height: $width;
 		}
 
 		&::-webkit-scrollbar-track {
@@ -123,15 +163,14 @@
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background: $color;
 			border-radius: $radius;
+			background: $color;
 		}
-
 	} @else {
-	
+
 		::-webkit-scrollbar {
-		    width: $width;
-		    height: $width;
+			width: $width;
+			height: $width;
 		}
 
 		::-webkit-scrollbar-track {
@@ -139,27 +178,27 @@
 		}
 
 		::-webkit-scrollbar-thumb {
-			background: $color;
 			border-radius: $radius;
-		}		
-
+			background: $color;
+		}
 	}
 }
 
 @mixin full-pos($position: relative) {
 	position: $position;
 	top: 0;
-	left: 0;
 	right: 0;
 	bottom: 0;
+	left: 0;
 }
 
 @mixin aspect-ratio($width, $height) {
-  position: relative;
-  &:before {
-    display: block;
-    content: "";
-    width: 100%;
-    padding-top: ($height / $width) * 100%;
-  }
+	position: relative;
+
+	&::before {
+		display: block;
+		width: 100%;
+		padding-top: ($height / $width) * 100%;
+		content: "";
+	}
 }

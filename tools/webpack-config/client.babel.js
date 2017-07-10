@@ -8,7 +8,7 @@ import path from 'path';
 import commonConfig from './common.babel';
 import stylesLoaders from '../loaders/styles';
 
-let config = Object.assign(commonConfig, {
+const config = Object.assign(commonConfig, {
 	
 	entry: {
 		
@@ -20,7 +20,7 @@ let config = Object.assign(commonConfig, {
 	output: {
 	
 		filename: '[name].js',
-		path:     path.resolve(__dirname, '..', '..', 'dist', 'public')
+		path: path.resolve(__dirname, '..', '..', 'dist', 'public')
 
 	},
 
@@ -71,6 +71,7 @@ if (process.env.NODE_ENV === 'development') {
 		}
 
 	);
+	
 		
 };
 
@@ -134,7 +135,7 @@ if (
 
 		new WebpackAssetsManifest({
 
-			output:  '../manifest.json'
+			output: '../manifest.json'
 
 		})
 

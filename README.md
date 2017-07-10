@@ -5,13 +5,14 @@
 * Webpack v3
 * HMR (also for reducers) in development mode
 * React router v4
-* Redux v3.7
+* Redux for state management
 * CSS Modules
 * Optional static build
 * Long term caching for static assets
 * Images optimization ([libpngissue fix for OSX user](https://github.com/tcoopman/image-webpack-loader#libpng-issues))
 * React component creation wizard
 * Flexbox grid
+* Eslint and Stylelint
 
 ## How it works
 
@@ -95,6 +96,5 @@ yarn start
 
 ## Contributing
 
-[https://github.com/claudiocalautti](https://github.com/claudiocalautti)
-
+[https://github.com/claudiocalautti](https://github.com/claudiocalautti)  
 [https://github.com/dwightjack/umeboshi-cli](https://github.com/dwightjack/umeboshi-cli)

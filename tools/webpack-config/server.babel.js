@@ -1,10 +1,7 @@
 import path from 'path';
 import commonConfig from './common.babel';
 import externals from 'webpack-node-externals';
-import webpack from 'webpack';
-
 import stylesLoaders from '../loaders/styles';
-
 
 export default Object.assign(commonConfig, {
 	

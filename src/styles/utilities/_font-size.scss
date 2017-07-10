@@ -16,11 +16,8 @@
  */
 
 @each $label, $value in map-get($typography, size) {
-	
+
 	.u-font-size-#{$label} {
-
 		@include map-to-style(map-deep-get($typography, size, $label));
-	
 	}
-
 }

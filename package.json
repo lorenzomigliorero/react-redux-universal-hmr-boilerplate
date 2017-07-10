@@ -11,7 +11,10 @@
     "build:static": "better-npm-run build:static",
     "build:server": "better-npm-run build:server",
     "build": "better-npm-run build",
-    "start": "node dist/server"
+    "start": "node dist/server",
+    "eslint": "eslint -c .eslintrc.json \"./src/**/*.js\"",
+    "stylelint": "stylelint './src/**/*.scss' --config .stylelintrc.json --fix",
+    "lint": "npm run eslint && npm run stylelint"
   },
   "repository": {
     "type": "git",
@@ -52,7 +55,7 @@
       }
     },
     "build": {
-      "command": "npm run build:client && npm run build:server",
+      "command": "npm run lint && npm run build:client && npm run build:server",
       "env": {
         "NODE_ENV": "production"
       }
@@ -116,6 +119,11 @@
     "rimraf": "2.6.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "stylelint": "^7.12.0",
+    "stylelint-config-standard": "^16.0.0",
+    "stylelint-order": "^0.5.0",
+    "stylelint-scss": "^1.5.1",
+    "stylelint-webpack-plugin": "^0.8.0",
     "webpack": "^3.0.0",
     "webpack-assets-manifest": "^0.7.0",
     "webpack-dev-middleware": "^1.11.0",

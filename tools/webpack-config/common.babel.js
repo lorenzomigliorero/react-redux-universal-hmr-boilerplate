@@ -2,9 +2,9 @@ import webpack from 'webpack';
 import path from 'path';
 import { mozjpeg, pngquant, svgo } from '../loaders/images';
 import files from '../loaders/files';
-import stylesLoaders from '../loaders/styles';
+import StyleLintPlugin from 'stylelint-webpack-plugin';
 
-let config = {
+const config = {
 	
 	module: {
 		
@@ -103,6 +103,8 @@ let config = {
 	},
 
 	plugins: [
+
+		new StyleLintPlugin()
 
 	]
 

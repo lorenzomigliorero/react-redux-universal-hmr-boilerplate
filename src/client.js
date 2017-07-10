@@ -19,7 +19,6 @@ const store = createStore(reducers, initialState, compose(
 	applyMiddleware(thunkMiddleware)
 ));
 
-
 /**
  * Require main styles
  */
