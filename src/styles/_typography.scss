@@ -4,9 +4,11 @@
 /** ---Font-face declaration--- **/
 
 @include font-face-woff2('varelaround-regular', '../assets/fonts/');
+
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display:700');
 
 body {
+
 	@include map-to-style(map-deep-get($typography, font-family, sans-serif));
 }
 
@@ -16,5 +18,6 @@ h3,
 h4,
 h5,
 h6 {
+
 	@include map-to-style(map-deep-get($typography, font-family, serif));
 }

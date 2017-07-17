@@ -13,6 +13,7 @@
 }
 
 @function map-deep-get($map, $keys...) {
+
 	@each $key in $keys {
 		$map: map-get($map, $key);
 	}
@@ -23,6 +24,7 @@
 /** ---Mixins--- **/
 
 @mixin font-face-woff2($name, $path, $filename: $name, $weight: normal, $style: normal) {
+
 	@font-face {
 		font-family: $name;
 		font-weight: $weight;
@@ -34,6 +36,7 @@
 }
 
 @mixin font-face($prefix, $path: '../assets/fonts/') {
+
 	@font-face {
 		font-family: $prefix;
 		font-weight: normal;
@@ -48,6 +51,7 @@
 }
 
 @mixin map-to-style($object) {
+
 	@each $property, $value in $object {
 		#{$property}: $value;
 	}
@@ -83,6 +87,7 @@
 }
 
 @mixin placeholder($color:#666, $autoreference: false) {
+
 	@if $autoreference {
 
 		&::-webkit-input-placeholder {
@@ -125,6 +130,7 @@
 }
 
 @mixin selection($bg-color:#666, $color:#fff, $autoreference: false) {
+
 	@if $autoreference {
 
 		&::selection {
@@ -151,6 +157,7 @@
 }
 
 @mixin scrollbar($color:#777, $bg-color: transparent, $autoreference: false, $radius: 4px, $width: 8px) {
+
 	@if $autoreference {
 
 		&::-webkit-scrollbar {

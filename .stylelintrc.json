@@ -12,14 +12,20 @@
         "rule-empty-line-before": ["always", {
             "ignore": ["after-comment"]
         }],
+        "at-rule-no-unknown": [ true, {
+            "ignoreAtRules": ["if", "else", "include", "each", "mixin", "for", "function", "return"]
+        }],
         "at-rule-empty-line-before": [ "always", {
-            "ignore": ["after-comment", "blockless-after-blockless", "inside-block"],
+            "ignore": ["after-comment", "blockless-after-same-name-blockless"],
             "ignoreAtRules": ["else", "content", "return", "warn"]
         }],
         "block-closing-brace-newline-after": ["always", {
             "ignoreAtRules": ["if", "else", "content", "return", "warn"]
         }],
         "declaration-colon-newline-after": null,
+        "declaration-block-no-redundant-longhand-properties": [ true, {
+            "ignoreShorthands": [ "/flex/" ]
+        }],
         "function-comma-newline-after": null,
         "no-missing-end-of-source-newline": null,
         "declaration-empty-line-before": "never",

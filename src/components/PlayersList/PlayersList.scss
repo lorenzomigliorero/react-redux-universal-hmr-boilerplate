@@ -1,6 +1,3 @@
-//@value font-size-lg, font-size-sm from "utilities/_font-size.scss";
-//@value font-family-serif from "utilities/_font-family.scss";
-
 @import 'variables';
 @import "sass-mq/mq";
 
@@ -27,12 +24,10 @@
 
 .odd {
 	color: map-get($colors, secondary);
-	//composes: font-family-serif;
 }
 
 .button {
 	width: 120px;
-	//composes: font-size-sm;
 }
 
 .add {
