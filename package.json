@@ -14,7 +14,7 @@
     "start": "node dist/server",
     "eslint": "eslint -c .eslintrc.json \"./src/**/*.js\"",
     "stylelint": "stylelint './src/**/*.scss' --config .stylelintrc.json --fix",
-    "lint": "npm run eslint && npm run stylelint"
+    "lint": "yarn run eslint && yarn run stylelint"
   },
   "repository": {
     "type": "git",
@@ -35,13 +35,13 @@
       }
     },
     "build:client": {
-      "command": "npm run clean && webpack -p --progress --hide-modules --config tools/webpack-config/client.babel.js",
+      "command": "yarn run clean && webpack -p --progress --hide-modules --config tools/webpack-config/client.babel.js",
       "env": {
         "NODE_ENV": "production"
       }
     },
     "build:static": {
-      "command": "npm run clean && webpack -p --progress --hide-modules --config tools/webpack-config/client.babel.js",
+      "command": "yarn run clean && webpack -p --progress --hide-modules --config tools/webpack-config/client.babel.js",
       "env": {
         "NODE_ENV": "production",
         "STATIC": true
@@ -55,7 +55,7 @@
       }
     },
     "build": {
-      "command": "npm run lint && npm run build:client && npm run build:server",
+      "command": "yarn run lint && yarn run build:client && yarn run build:server",
       "env": {
         "NODE_ENV": "production"
       }
