@@ -1,9 +1,8 @@
 import path from 'path';
 import jsonImporter from 'node-sass-json-importer';
-import autoprefixer from 'autoprefixer';
-import postcssModulesValues from 'postcss-modules-values';
 
-var css = {
+
+const css = {
 	loader: 'css-loader',
 	options: {
 		modules: true,
@@ -30,29 +29,14 @@ if (process.env.NODE_ENV === 'production') {
 
 };
 
-var postcss = {
+const postcss = {
 	loader: 'postcss-loader',
 	options: {
 		sourceMap: process.env.NODE_ENV === 'development'
 	}
 };
 
-if (process.env.NODE_ENV === 'production') {
-
-	postcss.options.plugins = () => [
-	
-		postcssModulesValues,
-
-		autoprefixer(
-			'last 2 versions',
-			'ie 10'
-		)
-
-	];
-
-};
-
-var scss = {
+const scss = {
 	loader: 'sass-loader',
 	options: {
 		importer: jsonImporter,
@@ -72,6 +56,7 @@ if (process.env.NODE_ENV === 'development') {
 export default [
 
 	css,
+	postcss,
 	scss
 
 ];

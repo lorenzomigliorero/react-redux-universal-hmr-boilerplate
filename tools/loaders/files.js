@@ -3,7 +3,7 @@ export default ({ outputPath = '' }) => ({
 	options: {
 		
 		name: process.env.NODE_ENV === 'development' || process.env.static ? '[name].[ext]' : '[name].[hash:5].[ext]',
-		outputPath: outputPath,
+		outputPath,
 		emitFile: !process.env.SSR
 	
 	}
