@@ -2,8 +2,6 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackAssetsManifest from 'webpack-assets-manifest';
-import pkg from '../../package.json';
-import _ from 'lodash';
 import path from 'path';
 import commonConfig from './common.babel';
 import stylesLoaders from '../loaders/styles';

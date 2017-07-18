@@ -18,8 +18,6 @@ export default (props) => {
 
 			<Helmet
 
-				description='Lorem ipsum'
-
 				meta={[
 					{
 						charset: 'utf-8'
