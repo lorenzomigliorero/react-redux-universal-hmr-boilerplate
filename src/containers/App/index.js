@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash/string';
 
-import Routes from '../../router';
+import Routes from '@/router';
 import pkg from '../../../package.json';
 
-import { Grid, Row, Col } from 'components/Grid/';
+import { Grid, Row, Col } from '@/components/Grid/';
 
-import PlayersListContainer from 'containers/PlayersList';
+import PlayersListContainer from '@/containers/PlayersList';
 
 export default (props) => {
 	

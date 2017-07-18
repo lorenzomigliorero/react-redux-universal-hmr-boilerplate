@@ -1,6 +1,6 @@
-import Home from 'containers/Home';
-import About from 'containers/About';
-import NotFound from 'containers/NotFound';
+import Home from '@/containers/Home';
+import About from '@/containers/About';
+import NotFound from '@/containers/NotFound';
 
 export default [
 

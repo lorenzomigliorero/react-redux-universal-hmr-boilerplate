@@ -10,11 +10,12 @@ import fs from 'fs';
 import path from 'path';
 import { minify } from 'html-minifier';
 import compression from 'compression';
-import App from './containers/App';
-import reducers from './reducers/';
-import template from './index.ejs';
+
+import App from '@/containers/App';
+import reducers from '@/reducers';
+import template from '@/index.ejs';
+import routes from '@/router/routes';
 import manifest from '../dist/manifest.json';
-import routes from './router/routes';
 
 const PORT = process.env.PORT || 3000;
 

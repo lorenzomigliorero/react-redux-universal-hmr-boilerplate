@@ -92,12 +92,7 @@ const config = {
 		],
 
 		alias: {
-			components: path.resolve(__dirname, '..', '..', 'src', 'components'),
-			containers: path.resolve(__dirname, '..', '..', 'src', 'containers'),
-			reducers: path.resolve(__dirname, '..', '..', 'src', 'reducers'),
-			state: path.resolve(__dirname, '..', '..', 'src', 'state'),
-			utilities: path.resolve(__dirname, '..', '..', 'src', 'styles', 'utilities'),
-			views: path.resolve(__dirname, '..', '..', 'src', 'views')
+			'@': path.resolve(__dirname, '..', '..', 'src')
 		}
 
 	},

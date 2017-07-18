@@ -13,7 +13,7 @@ export default class Image extends Component {
 
 	get image() {
 	
-		return require(`../../assets/svg-inline/${this.props.src}`);
+		return require(`@/assets/svg-inline/${this.props.src}`);
 
 	}
 

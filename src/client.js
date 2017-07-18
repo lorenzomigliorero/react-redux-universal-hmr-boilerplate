@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import reducers from './reducers';
+import reducers from '@/reducers';
 
 const Router = require('react-router-dom')[process.env.STATIC ? 'HashRouter' : 'BrowserRouter'];
 
@@ -23,7 +23,7 @@ const store = createStore(reducers, initialState, compose(
  * Require main styles
  */
 
-require('./styles/index.scss');
+require('@/styles');
 
 /**
  * Render App component
@@ -31,7 +31,7 @@ require('./styles/index.scss');
 
 const renderComponent = () => {
 
-	const App = require('./containers/App');
+	const App = require('@/containers/App');
 
 	return (
 
@@ -56,7 +56,7 @@ render(renderComponent(), document.getElementById('root'));
 
 if (module.hot) {
 	
-	module.hot.accept('./containers/App', () => render(renderComponent(), document.getElementById('root')));
-	module.hot.accept('./reducers', () => store.replaceReducer(require('./reducers')));
+	module.hot.accept('@/containers/App', () => render(renderComponent(), document.getElementById('root')));
+	module.hot.accept('@/reducers', () => store.replaceReducer(require('@/reducers')));
 
 };

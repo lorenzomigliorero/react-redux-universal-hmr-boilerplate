@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { isEmpty } from 'lodash/lang';
 
-import { Row, Col } from 'components/Grid/';
-import Box from 'components/Box';
-import Media from 'components/Media';
-import Image from 'components/Image';
-import SvgInline from 'components/SvgInline';
+import { Row, Col } from '@/components/Grid/';
+import Box from '@/components/Box';
+import Media from '@/components/Media';
+import Image from '@/components/Image';
+import SvgInline from '@/components/SvgInline';
 
-import { actions } from 'state/Images';
+import { actions } from '@/state/Images';
 
 class Home extends Component {
 
