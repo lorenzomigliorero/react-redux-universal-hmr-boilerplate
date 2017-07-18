@@ -1,7 +1,6 @@
 <%
 
     var params = typeof(locals) !== 'undefined' ? locals : {};
-    params = typeof(htmlWebpackPlugin) !== 'undefined' ? htmlWebpackPlugin.options : params;
 
     params = Object.assign({
 
@@ -16,14 +15,12 @@
 %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html <% if (params.helmet.htmlAttributes) { %><%= params.helmet.htmlAttributes.toString() %><% } %>>
     
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         
-        <% if (params.helmet.title) { %><%= params.helmet.title %><% } %>
+        <% if (params.helmet.title) { %><%= params.helmet.title.toString() %><% } %>
+        <% if (params.helmet.meta) { %><%= params.helmet.meta.toString() %><% } %>
 
         <% if (params.manifest['main.css']) { %>
         
@@ -33,7 +30,7 @@
     
     </head>
     
-    <body>
+    <body <% if (params.helmet.htmlAttributes) { %><%= params.helmet.bodyAttributes.toString() %><% } %>>
         
         <div id="root"><%= params.markup %></div>
 

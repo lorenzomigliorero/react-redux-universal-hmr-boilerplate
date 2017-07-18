@@ -156,9 +156,7 @@ if (
 		
 		new HtmlWebpackPlugin({
 			template: './src/index.ejs',
-			filename: 'index.html',
-			title: _.startCase(pkg.name),
-			description: pkg.description
+			filename: 'index.html'
 		})
 	
 	);
