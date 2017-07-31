@@ -3,7 +3,8 @@
 [![Travis](https://img.shields.io/travis/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/lorenzomigliorero/react-redux-universal-hmr-boilerplate) [![David](https://img.shields.io/david/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg?maxAge=2592000&style=flat-square)]() [![David](https://img.shields.io/david/dev/lorenzomigliorero/react-redux-universal-hmr-boilerplate.svg?maxAge=2592000&style=flat-square)]()
 
 * Webpack v3
-* HMR (also for reducers) in development mode
+* HMR Client side (also for Redux reducers)
+* HMR Server side
 * React router v4
 * Redux for state management
 * CSS Modules
@@ -34,7 +35,7 @@ yarn install
 
 ## Development
 
-Run website in development mode on `localhost:3001`, with Hot Module Replacement for Reducers and Components
+Run website in development mode on `localhost:3000`, with Hot Module Replacement Client side and Server side.
 
 ```javascript
 yarn run dev
@@ -52,7 +53,7 @@ yarn run build
 
 ### Start 
 
-Run website in production mode on `localhost:3000`
+Run website in production mode on `localhost:${process.env.PORT || 3000}`
 
 ```
 yarn run start
