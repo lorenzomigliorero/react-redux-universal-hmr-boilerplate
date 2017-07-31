@@ -1,9 +1,9 @@
-import path from 'path';
+import nodeExternals from 'webpack-node-externals';
 import commonConfig from './common.babel';
-import externals from 'webpack-node-externals';
-import stylesLoaders from '../loaders/styles';
+import stylesLoaders from '../webpack-loaders/styles';
+import paths from '../paths';
 
-export default Object.assign(commonConfig, {
+export default Object.assign({}, commonConfig, {
 	
 	target: 'node',
 
@@ -14,18 +14,19 @@ export default Object.assign(commonConfig, {
 
 	entry: {
 		
-		server: [
+		server: process.env.NODE_ENV === 'development' ? [
 			'./src/server'
+		] : [
+			'./src/server/server.js'
 		]
 	
 	},
 
-	output: {
-		
-		filename: '[name].js',
-		path: path.resolve(__dirname, '..', '..', 'dist')
+	output: Object.assign({}, commonConfig.output, {
+	
+		path: paths.DIST
 
-	},
+	}),
 
 	module: {
 		
@@ -52,9 +53,13 @@ export default Object.assign(commonConfig, {
 	},
 
 	externals: [
-
-		externals()
+		
+		nodeExternals({
+			whitelist: [
+				'webpack/hot/poll?1000'				
+			]
+		})
 
 	]
-
+	
 });

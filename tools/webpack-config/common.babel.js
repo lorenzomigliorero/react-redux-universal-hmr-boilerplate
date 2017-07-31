@@ -1,11 +1,20 @@
+import StyleLintPlugin from 'stylelint-webpack-plugin';
 import webpack from 'webpack';
 import path from 'path';
-import { mozjpeg, pngquant, svgo } from '../loaders/images';
-import files from '../loaders/files';
-import StyleLintPlugin from 'stylelint-webpack-plugin';
+import { svgo } from '../webpack-loaders/images';
+import files from '../webpack-loaders/files';
+import { PUBLIC_PATH } from '../../src/common/constants';
+import paths from '../paths';
 
 const config = {
 	
+	output: {
+	
+		filename: '[name].js',
+		publicPath: PUBLIC_PATH
+
+	},
+
 	module: {
 		
 		rules: [
@@ -18,28 +27,20 @@ const config = {
 			},
 			{
 				enforce: 'pre',
-				test: /\.(jpe?g|png|gif|svg|ico)$/i,
-				include: path.resolve(__dirname, '..', '..', 'src', 'assets', 'images'),
+				include: paths.ASSETS,
+				exclude: path.resolve(paths.ASSETS, 'svg-inline'),
 				loaders: [
 
 					files({
-						outputPath: 'assets/images/'
-					}),
-					{
-						loader: 'image-webpack-loader',
-						options: {
-							mozjpeg,
-							pngquant,
-							svgo
-						}
-					}
+						outputPath: 'assets/'
+					})
 				
 				]
 			},
 			{
 				enforce: 'pre',
 				test: /\.(svg)$/i,
-				include: path.resolve(__dirname, '..', '..', 'src', 'assets', 'svg-inline'),
+				include: path.resolve(paths.ASSETS, 'svg-inline'),
 				loaders: [
 
 					'raw-loader',
@@ -56,27 +57,7 @@ const config = {
 				test: /\.js?$/,
 				exclude: /node_modules/,
 				use: 'babel-loader'
-			},
-			{
-				test: /\.(ttf|eot|woff|woff2|svg)$/,
-				include: path.resolve(__dirname, '..', '..', 'src', 'assets', 'fonts'),
-				loaders: [
-					
-					files({
-						outputPath: 'assets/fonts/'
-					})
-				
-				]
-			},
-			{
-				test: /\.(wav|mp3|mp4)$/,
-				include: path.resolve(__dirname, '..', '..', 'src', 'assets', 'media'),
-				loaders: [
-					files({
-						outputPath: 'assets/media/'
-					})
-				]
-			},
+			}
 
 		]
 	
@@ -92,26 +73,32 @@ const config = {
 		],
 
 		alias: {
-			'@': path.resolve(__dirname, '..', '..', 'src')
+			'@': paths.COMMON
 		}
 
 	},
 
 	plugins: [
 
+		new webpack.DefinePlugin({
+
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+			'process.env.STATIC': JSON.stringify(process.env.STATIC)
+
+		}),
+		
+		new webpack.NamedModulesPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
 		new StyleLintPlugin()
 
 	]
 
 };
 
-if (
-	process.env.NODE_ENV === 'production'
-	|| process.env.STATIC
-) {
+if (process.env.NODE_ENV === 'production') {
 
 	config.plugins.push(
-	
+
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false,

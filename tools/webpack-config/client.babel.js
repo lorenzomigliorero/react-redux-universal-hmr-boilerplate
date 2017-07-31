@@ -1,164 +1,151 @@
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackAssetsManifest from 'webpack-assets-manifest';
-import path from 'path';
 import commonConfig from './common.babel';
-import stylesLoaders from '../loaders/styles';
+import stylesLoaders from '../webpack-loaders/styles';
 
-const config = Object.assign(commonConfig, {
+import paths from '../paths';
+
+const config = Object.assign({}, commonConfig, {
+	
+	target: 'web',
 	
 	entry: {
 		
-		main: './src/client',
-		vendors: './src/vendors'
+		main: './src/client/',
+		vendors: './src/client/vendors'
 	
 	},
 
-	output: {
+	output: Object.assign({}, commonConfig.output, {
 	
-		filename: '[name].js',
-		path: path.resolve(__dirname, '..', '..', 'dist', 'public')
+		path: paths.PUBLIC
 
-	},
+	}),
 
 	plugins: [
 
 		...commonConfig.plugins,
 
-		new webpack.DefinePlugin({
-			
-			'process.env.STATIC': JSON.stringify(process.env.STATIC)
-
-		}),
-
 		new webpack.optimize.CommonsChunkPlugin({
 			
-			name: !process.env.STATIC ? ['vendors', `${process.env.NODE_ENV === 'development' ? '' : '../'}manifest`] : ['vendors'],
+			name: (() => {
+
+				const chunks = ['vendors'];
+
+				if (
+					process.env.NODE_ENV === 'production'
+					&& !process.env.STATIC
+				) {
+
+					chunks.push('../manifest');
+
+				};
+
+				return chunks;
+
+			})(),
 			minChunks: Infinity
 		
-		}),
-
-		new webpack.NoEmitOnErrorsPlugin(),
-
-		new webpack.LoaderOptionsPlugin({
-			debug: true
 		})
 
 	]
 
 });
 
-/**
- * Use style loader in development environment for performance reasons
- */
+/* eslint-disable indent */
 
-if (process.env.NODE_ENV === 'development') {
+switch (process.env.NODE_ENV) {
+
+	case ('development'):
+
+		/**
+		 * Use style loader in development environment for HMR support
+		 */
+
+		config.devtool = 'eval';
+
+		config.module.rules.push(
+
+			{
+
+				test: /\.scss$/,
+				exclude: /node_modules/,
+				use: ['style-loader'].concat(stylesLoaders)
+				
+			}
+
+		);
 	
-	// devtool: 'nosources-source-map',
-	config.devtool = 'eval';
+	break;
+	
+	default:
+	
+		/**
+		 * Use Extract text in production or static environment
+		 */
 
-	config.module.rules.push(
+		config.module.rules.push(
 
-		{
+			{
+				test: /\.scss$/,
+				exclude: /node_modules/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: stylesLoaders
+				})
+			}
 
-			test: /\.scss$/,
-			exclude: /node_modules/,
-			use: ['style-loader'].concat(stylesLoaders)
+		);
+
+		config.plugins.push(
+
+			new ExtractTextPlugin({
+				
+				filename: process.env.STATIC ? 'style.css' : 'style.[contenthash:5].css',
+				ignoreOrder: true
 			
-		}
-
-	);
-	
-		
-};
-
-/**
- * Use Extract text in production or static environment
- */
-
-if (
-	process.env.NODE_ENV === 'production'
-	|| process.env.STATIC
-) {
-
-	config.module.rules.push(
-
-		{
-			test: /\.scss$/,
-			exclude: /node_modules/,
-			use: ExtractTextPlugin.extract({
-				fallback: 'style-loader',
-				use: stylesLoaders
 			})
-		}
+		
+		);
 
-	);
+		if (!process.env.STATIC) {
 
-	config.plugins.push(
+			config.output.filename = '[name].[chunkhash:5].js';
 
-		new ExtractTextPlugin({
+			config.plugins.push(
+
+				/**
+				 * Configure webpack to choose ids in a deterministic way.
+				 */
+
+				new webpack.NamedModulesPlugin(),
 			
-			filename: process.env.STATIC ? 'style.css' : 'style.[contenthash:5].css',
-			ignoreOrder: true
-		
-		})
+				/**
+				 * Extract assets url with hash in json file
+				 * Exclude manifest.js file
+				 */
 
-	);
+				new WebpackAssetsManifest({
+
+					output: '../manifest.json',
+					customize: (key, value) => {
+						if (key === '../manifest.js') {
+							return {
+								key: 'manifest.js',
+								value: value.replace('../', '')
+							};
+						}
+						return true;
+					}
+
+				})
+
+			);
+
+		};
 	
-};
-
-/**
- * Long term caching
- */
-
-if (
-	process.env.NODE_ENV === 'production'
-	&& !process.env.STATIC
-) {
-
-	config.output.filename = '[name].[chunkhash:5].js';
-
-	config.plugins.push(
-
-		/**
-		 * Configure webpack to choose ids in a deterministic way.
-		 */
-
-		new webpack.NamedModulesPlugin(),
-		
-		/**
-		 * Extract assets url with hash in json file
-		 */
-
-		new WebpackAssetsManifest({
-
-			output: '../manifest.json'
-
-		})
-
-	);
-
 }
-
-/**
- * Create static index.html in development or static environment
- */
-
-if (
-	process.env.NODE_ENV === 'development'
-	|| process.env.STATIC
-) {
-
-	config.plugins.push(
-		
-		new HtmlWebpackPlugin({
-			template: './src/index.ejs',
-			filename: 'index.html'
-		})
-	
-	);
-
-};
+/* eslint-enable indent */
 
 export default config;

@@ -1,0 +1,54 @@
+<%
+
+    var merge = require('lodash').merge;
+    var params = typeof(locals) !== 'undefined' ? locals : {};
+    params = typeof(htmlWebpackPlugin) !== 'undefined' ? htmlWebpackPlugin.options : params;
+
+    params = merge({}, {
+
+        env                     : 'development',
+        state                   : null,
+        markup                  : '',
+        publicFolder            : '',
+        helmet                  : {
+            title: '',
+            htmlAttributes: [],
+            bodyAttributes: [],
+            meta: [],
+            link: []
+        },
+        manifest: {
+            'main.css': 'style.css',
+            'main.js': 'main.js',
+            'vendors.js': 'vendors.js'
+        },
+        manifestFileContents: ''
+
+    }, params);
+
+%><!DOCTYPE html>
+<html<% if (params.helmet.htmlAttributes.toString()) { %> <%= params.helmet.htmlAttributes.toString() %><% } %>>
+
+    <head>
+
+        <% if (params.helmet.title.toString()) { %><%= params.helmet.title.toString() %><% } %>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <% if (params.helmet.meta.toString()) { %><%= params.helmet.meta.toString() %><% } %>
+        <% if (params.helmet.link.toString()) { %><%= params.helmet.link.toString() %><% } %>
+        <% if (params.env === 'production') { %><link rel="stylesheet" href="<%= params.publicFolder + params.manifest['main.css'] %>" /><% } %>
+
+    </head>
+    
+    <body<% if (params.helmet.bodyAttributes.toString()) { %> <%= params.helmet.bodyAttributes.toString() %><% } %>>
+        
+        <div id="root"><%= params.markup %></div>
+        <% if (params.state) { %><script>window.__REDUX_STATE__ = <%= JSON.stringify(params.state) %></script><% } %>
+        <% if (params.manifestFileContents) { %><script><%= params.manifestFileContents %></script><% } %>
+        <script src="<%= params.publicFolder + params.manifest['vendors.js'] %>"></script>
+        <script src="<%= params.publicFolder + params.manifest['main.js'] %>"></script>
+
+    </body>
+
+</html>

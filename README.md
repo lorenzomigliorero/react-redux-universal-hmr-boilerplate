@@ -97,4 +97,5 @@ yarn start
 ## Contributing
 
 [https://github.com/claudiocalautti](https://github.com/claudiocalautti)  
-[https://github.com/dwightjack/umeboshi-cli](https://github.com/dwightjack/umeboshi-cli)
+[https://github.com/dwightjack/umeboshi-cli](https://github.com/dwightjack/umeboshi-cli)  
+[https://hackernoon.com/hot-reload-all-the-things-ec0fed8ab0](https://hackernoon.com/hot-reload-all-the-things-ec0fed8ab0)
